@@ -11,9 +11,9 @@
   <meta name="theme-color" content="#dcd9d0">
 
   <!-- OpenGraph pour partage WhatsApp & Réseaux Sociaux -->
-  <meta property="og:title" content="دعوة زفاف أنس & بشرى 💍✨">
+  <meta property="og:title" content="يسعدني دعوتكم لزفاف أنس و بشرى 🤍✨">
   <meta property="og:description"
-    content="يسعدنا ويشرفنا حضوركم لمشاركتنا فرحة العمر بقاعة أمير برستيج الأربعاء 07 أكتوبر 2026">
+    content="يسعدنا ويشرفنا حضوركم لمشاركتنا فرحة العمر بقاعة الحفلات أمير برستيج - الأربعاء 07 أكتوبر 2026">
   <meta property="og:type" content="website">
 
   <!-- Google Fonts de prestige -->
@@ -1312,7 +1312,8 @@
     <button class="tool-btn active" id="petalToggleBtn" title="تساقط الورد والبريق">
       <i class="fa-solid fa-wand-magic-sparkles"></i>
     </button>
-    <a href="https://api.whatsapp.com/send?text=يسعدني+دعوتكم+لمشاهدة+بطاقة+دعوة+زفاف+أنس+و+بشرى+💍✨" target="_blank"
+    <a href="https://api.whatsapp.com/send?text=%D9%8A%D8%B3%D8%B9%D8%AF%D9%86%D9%8A%20%D8%AF%D8%B9%D9%88%D8%AA%D9%83%D9%85%20%D9%84%D8%B2%D9%81%D8%A7%D9%81%20%D8%A3%D9%86%D8%B3%20%D9%88%20%D8%A8%D8%B4%D8%B1%D9%89%20%F0%9F%A4%8D%E2%9C%A8%0Ahttps%3A%2F%2Fcarteinvitationanes.vercel.app"
+      id="whatsappShareBtn" target="_blank"
       class="tool-btn" title="مشاركة عبر واتساب">
       <i class="fa-brands fa-whatsapp"></i>
     </a>
@@ -1982,12 +1983,22 @@
     }
 
     copyLinkBtn.addEventListener('click', () => {
-      navigator.clipboard.writeText(window.location.href).then(() => {
-        showToast('تم نسخ رابط بطاقة الدعوة بنجاح! 📋✨');
+      const shareUrl = window.location.href.includes('localhost') ? 'https://carteinvitationanes.vercel.app' : window.location.href;
+      const shareMsg = `يسعدني دعوتكم لزفاف أنس و بشرى 🤍✨\n${shareUrl}`;
+      navigator.clipboard.writeText(shareMsg).then(() => {
+        showToast('تم نسخ دعوة الزفاف بنجاح! 📋✨');
       }).catch(() => {
         showToast('رابط الدعوة جاهز للمشاركة! ✨');
       });
     });
+
+    // Configuration dynamique du lien de partage WhatsApp
+    const whatsappShareBtn = document.getElementById('whatsappShareBtn');
+    if (whatsappShareBtn) {
+      const shareUrl = window.location.href.includes('localhost') ? 'https://carteinvitationanes.vercel.app' : window.location.href;
+      const shareText = `يسعدني دعوتكم لزفاف أنس و بشرى 🤍✨\n${shareUrl}`;
+      whatsappShareBtn.href = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;
+    }
 
     /* --------------------------------------------------------------------------
        8. GESTION DE LA LETTRE FERMÉE & ANIMATION D'OUVERTURE ROYALE
