@@ -137,18 +137,18 @@
 
     .tool-btn.playing i {
       animation: pulseMusic 1.8s infinite ease-in-out;
+      will-change: transform;
     }
 
     @keyframes pulseMusic {
 
       0%,
       100% {
-        transform: scale(1);
+        transform: scale(1) translateZ(0);
       }
 
       50% {
-        transform: scale(1.22);
-        color: #ffd778;
+        transform: scale(1.22) translateZ(0);
       }
     }
 
@@ -239,12 +239,13 @@
       position: absolute;
       top: -8px;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translateX(-50%) translateZ(0);
       width: 58%;
       max-width: 310px;
       z-index: 10;
       pointer-events: none;
       filter: drop-shadow(0 6px 14px rgba(90, 75, 55, 0.18));
+      will-change: transform;
     }
 
     .dove {
@@ -257,6 +258,8 @@
       z-index: 9;
       pointer-events: none;
       filter: drop-shadow(0 4px 10px rgba(90, 75, 55, 0.16));
+      transform: translateZ(0);
+      will-change: transform;
     }
 
     .dove-left {
@@ -265,7 +268,7 @@
 
     .dove-right {
       right: 1%;
-      transform: scaleX(-1);
+      transform: scaleX(-1) translateZ(0);
     }
 
     .bottom-left-flowers {
@@ -279,6 +282,8 @@
       z-index: 10;
       pointer-events: none;
       filter: drop-shadow(2px -2px 14px rgba(90, 75, 55, 0.18));
+      transform: translateZ(0);
+      will-change: transform;
     }
 
     /* ==========================================================================
@@ -370,9 +375,11 @@
       vertical-align: middle;
       display: inline-block;
       margin: 0 4px;
-      filter: drop-shadow(0 4px 8px rgba(184, 134, 40, 0.45)) drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
+      filter: drop-shadow(0 3px 6px rgba(184, 134, 40, 0.45));
       animation: ringGleam 3s infinite ease-in-out;
       transform-origin: center center;
+      will-change: transform;
+      transform: translateZ(0);
     }
 
     .realistic-ring-img.ring-letter {
@@ -383,12 +390,10 @@
 
     @keyframes ringGleam {
       0%, 100% {
-        transform: scale(1) rotate(0deg);
-        filter: drop-shadow(0 4px 8px rgba(184, 134, 40, 0.45)) drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
+        transform: scale(1) rotate(0deg) translateZ(0);
       }
       50% {
-        transform: scale(1.1) rotate(4deg);
-        filter: drop-shadow(0 6px 14px rgba(212, 175, 55, 0.75)) drop-shadow(0 0 12px rgba(255, 235, 160, 0.85));
+        transform: scale(1.08) rotate(3deg) translateZ(0);
       }
     }
 
@@ -552,6 +557,8 @@
       padding: 24px 20px;
       text-align: center;
       overflow: hidden;
+      content-visibility: auto;
+      contain-intrinsic-size: 0 320px;
     }
 
     .embossed-panel::before {
@@ -941,6 +948,8 @@
       transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
       user-select: none;
       border-radius: 12px;
+      transform: translateZ(0);
+      will-change: transform;
     }
 
     .envelope-box:hover {
@@ -953,6 +962,8 @@
       object-fit: cover;
       display: block;
       border-radius: 12px;
+      transform: translateZ(0);
+      backface-visibility: hidden;
     }
 
     /* Vue fermée de l'enveloppe */
@@ -961,6 +972,9 @@
       inset: 0;
       z-index: 4;
       border-radius: 12px;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+      will-change: opacity, transform;
       transition: opacity 0.55s ease 0.15s, transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
@@ -971,7 +985,9 @@
       z-index: 1;
       border-radius: 12px;
       opacity: 0;
-      transform: scale(0.97);
+      transform: scale(0.97) translateZ(0);
+      backface-visibility: hidden;
+      will-change: opacity, transform;
       transition: opacity 0.55s ease 0.15s, transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
@@ -980,7 +996,7 @@
       position: absolute;
       top: 62.5%;
       left: 50%;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%) translateZ(0);
       width: clamp(92px, 22vw, 118px);
       height: clamp(92px, 22vw, 118px);
       z-index: 6;
@@ -988,6 +1004,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      will-change: transform, opacity;
+      backface-visibility: hidden;
       transition: transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.35s ease;
     }
 
@@ -998,10 +1016,12 @@
       filter: drop-shadow(0 10px 22px rgba(112, 70, 12, 0.48)) drop-shadow(0 3px 6px rgba(0, 0, 0, 0.25));
       animation: sealGentlyPulse 2.8s infinite ease-in-out;
       transition: transform 0.25s ease;
+      transform: translateZ(0);
+      will-change: transform;
     }
 
     .envelope-box:hover .seal-stamp-img {
-      transform: scale(1.08) rotate(3deg);
+      transform: scale(1.08) rotate(3deg) translateZ(0);
     }
 
     .seal-halo-pulse {
@@ -1012,24 +1032,26 @@
       border: 2px solid rgba(212, 175, 55, 0.75);
       animation: sealHalo 2.2s infinite ease-out;
       pointer-events: none;
+      transform: translateZ(0);
+      will-change: transform, opacity;
     }
 
     @keyframes sealGentlyPulse {
       0%, 100% {
-        transform: scale(1);
+        transform: scale(1) translateZ(0);
       }
       50% {
-        transform: scale(1.05);
+        transform: scale(1.05) translateZ(0);
       }
     }
 
     @keyframes sealHalo {
       0% {
-        transform: scale(0.85);
+        transform: scale(0.85) translateZ(0);
         opacity: 0.95;
       }
       100% {
-        transform: scale(1.45);
+        transform: scale(1.45) translateZ(0);
         opacity: 0;
       }
     }
@@ -1131,20 +1153,19 @@
       align-items: center;
       gap: 2px;
       backdrop-filter: blur(8px);
-      transition: all 0.3s ease;
-      animation: pulsePrompt 2s infinite ease-in-out;
+      transition: transform 0.25s ease;
+      animation: pulsePrompt 2.4s infinite ease-in-out;
       user-select: none;
+      will-change: transform;
+      transform: translateZ(0);
     }
 
     @keyframes pulsePrompt {
       0%, 100% {
-        transform: translateY(0);
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        transform: translateY(0) scale(1) translateZ(0);
       }
       50% {
-        transform: translateY(-3px);
-        box-shadow: 0 12px 28px rgba(166, 124, 46, 0.35);
-        border-color: var(--text-gold-primary);
+        transform: translateY(-4px) scale(1.025) translateZ(0);
       }
     }
 
@@ -1185,7 +1206,7 @@
         <div class="letter-royal-title">دعوة زفاف خاصة</div>
         <div class="letter-couple-names">
           <span>أنس</span>
-          <img src="assets/wedding_ring.png" alt="Alliance" class="realistic-ring-img ring-letter">
+          <img src="assets/wedding_ring.png" alt="Alliance" class="realistic-ring-img ring-letter" decoding="async">
           <span>بشرى</span>
         </div>
         <div class="letter-couple-names-fr">Anes &amp; Bouchra</div>
@@ -1196,7 +1217,7 @@
 
         <!-- Vue Enveloppe Ouverte (Sous la vue fermée) -->
         <div class="envelope-open-layer">
-          <img src="assets/open_envelope_opt.jpg" alt="Enveloppe Ouverte" class="envelope-img">
+          <img src="assets/open_envelope_opt.jpg" alt="Enveloppe Ouverte" class="envelope-img" decoding="async">
         </div>
 
         <!-- Carte d'invitation qui émerge de l'intérieur lors de l'ouverture -->
@@ -1211,12 +1232,12 @@
 
         <!-- Vue Enveloppe Fermée (Au-dessus avec le sceau de cire d'or) -->
         <div class="envelope-closed-layer" id="envelopeClosedLayer">
-          <img src="assets/closed_envelope_opt.jpg" alt="Lettre Fermée" class="envelope-img">
+          <img src="assets/closed_envelope_opt.jpg" alt="Lettre Fermée" class="envelope-img" fetchpriority="high" decoding="async">
 
           <!-- Le Tampon / Sceau de Cire Doré Royal Photoréaliste -->
           <div class="envelope-wax-seal" id="envelopeSeal">
             <div class="seal-halo-pulse"></div>
-            <img src="assets/gold_seal_optimized.png" alt="Sceau Royal A&B" class="seal-stamp-img">
+            <img src="assets/gold_seal_optimized.png" alt="Sceau Royal A&B" class="seal-stamp-img" fetchpriority="high" decoding="async">
           </div>
         </div>
 
@@ -1441,14 +1462,14 @@
     </div>
 
     <!-- Bouquet de roses réalistes en haut au centre -->
-    <img src="assets/top_roses_clean.png" alt="Bouquet de roses blanches de prestige" class="top-bouquet">
+    <img src="assets/top_roses_clean.png" alt="Bouquet de roses blanches de prestige" class="top-bouquet" decoding="async">
 
     <!-- Colombes réalistes avec rameaux d'olivier -->
-    <img src="assets/white_dove_clean.png" alt="Colombe de la paix" class="dove dove-left">
-    <img src="assets/white_dove_clean.png" alt="Colombe de la paix" class="dove dove-right">
+    <img src="assets/white_dove_clean.png" alt="Colombe de la paix" class="dove dove-left" decoding="async">
+    <img src="assets/white_dove_clean.png" alt="Colombe de la paix" class="dove dove-right" decoding="async">
 
     <!-- Bouquet de roses blanches réalistes d'angle en bas à gauche -->
-    <img src="assets/corner_roses_clean.png" alt="Roses d'angle" class="bottom-left-flowers">
+    <img src="assets/corner_roses_clean.png" alt="Roses d'angle" class="bottom-left-flowers" decoding="async">
   </div>
 
   <!-- ==========================================================================
@@ -1497,7 +1518,7 @@
       <div class="venue-showcase">
         <div class="venue-img-wrapper">
           <img src="assets/amir_prestige.jpg" onerror="this.onerror=null; this.src='assets/banquet.jpg'"
-            alt="قاعة أمير برستيج" class="venue-img">
+            alt="قاعة أمير برستيج" class="venue-img" loading="lazy" decoding="async">
         </div>
 
         <div class="venue-name-title">Salle des Fêtes Amir Prestige</div>
@@ -1678,20 +1699,27 @@
     }, { once: true });
 
     /* --------------------------------------------------------------------------
-       2. SYSTÈME DE PARTICULES (Poussière d'Or & Pétales de Rose)
+       2. SYSTÈME DE PARTICULES OPTIMISÉ 60/120 FPS (Poussière d'Or & Pétales)
        -------------------------------------------------------------------------- */
     const canvas = document.getElementById('particlesCanvas');
-    const ctx = canvas.getContext('2d');
-    let width, height;
+    const ctx = canvas.getContext('2d', { alpha: true });
+    let width = 0, height = 0;
     let particles = [];
     let petalsActive = true;
+    let animId = null;
+    let isPageVisible = !document.hidden;
 
     function resizeCanvas() {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
     }
-    window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
+
+    let resizeRaf = null;
+    window.addEventListener('resize', () => {
+      if (resizeRaf) cancelAnimationFrame(resizeRaf);
+      resizeRaf = requestAnimationFrame(resizeCanvas);
+    }, { passive: true });
 
     class Particle {
       constructor(type = 'dust') {
@@ -1704,25 +1732,25 @@
         this.y = type === 'dust' ? Math.random() * height : -20;
 
         if (this.type === 'dust') {
-          this.size = Math.random() * 2 + 0.8;
-          this.speedY = -(Math.random() * 0.5 + 0.2);
-          this.speedX = (Math.random() - 0.5) * 0.4;
-          this.alpha = Math.random() * 0.6 + 0.2;
-          this.color = Math.random() > 0.3 ? '#d4af37' : '#f7e7be';
+          this.size = Math.random() * 1.8 + 0.8;
+          this.speedY = -(Math.random() * 0.45 + 0.15);
+          this.speedX = (Math.random() - 0.5) * 0.35;
+          this.alpha = Math.random() * 0.55 + 0.25;
+          this.color = Math.random() > 0.35 ? '#d4af37' : '#faeccb';
         } else if (this.type === 'petal') {
-          this.size = Math.random() * 6 + 5;
-          this.speedY = Math.random() * 1.3 + 0.7;
-          this.speedX = Math.sin(Math.random() * 6) * 1.1;
-          this.angle = Math.random() * Math.PI * 2;
-          this.angleSpeed = (Math.random() - 0.5) * 0.03;
-          this.color = Math.random() > 0.5 ? 'rgba(247, 244, 238, 0.85)' : 'rgba(235, 205, 185, 0.75)';
+          this.size = Math.random() * 5 + 4.5;
+          this.speedY = Math.random() * 1.2 + 0.6;
+          this.speedX = Math.sin(Math.random() * 6) * 0.9;
+          this.angle = Math.random() * 6.28;
+          this.angleSpeed = (Math.random() - 0.5) * 0.025;
+          this.color = Math.random() > 0.5 ? 'rgba(250, 246, 240, 0.88)' : 'rgba(238, 212, 194, 0.78)';
         } else if (this.type === 'confetti') {
           this.size = Math.random() * 5 + 3;
           this.speedY = Math.random() * 3 + 2;
           this.speedX = (Math.random() - 0.5) * 4;
-          this.angle = Math.random() * Math.PI * 2;
-          this.angleSpeed = (Math.random() - 0.5) * 0.1;
-          this.color = ['#d4af37', '#a67c2e', '#ffffff', '#e8c5b8'][Math.floor(Math.random() * 4)];
+          this.angle = Math.random() * 6.28;
+          this.angleSpeed = (Math.random() - 0.5) * 0.08;
+          this.color = ['#d4af37', '#b88628', '#ffffff', '#e8c5b8'][Math.floor(Math.random() * 4)];
         }
       }
 
@@ -1731,6 +1759,8 @@
           this.y += this.speedY;
           this.x += this.speedX;
           if (this.y < 0) this.y = height;
+          if (this.x < 0) this.x = width;
+          else if (this.x > width) this.x = 0;
         } else if (this.type === 'petal') {
           this.y += this.speedY;
           this.x += Math.sin(this.y * 0.015) * 0.8;
@@ -1740,74 +1770,91 @@
           this.y += this.speedY;
           this.x += this.speedX;
           this.angle += this.angleSpeed;
-          this.speedY += 0.05;
+          this.speedY += 0.06;
         }
-      }
-
-      draw() {
-        ctx.save();
-        if (this.type === 'dust') {
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-          ctx.fillStyle = this.color;
-          ctx.globalAlpha = this.alpha;
-          ctx.shadowBlur = 5;
-          ctx.shadowColor = '#d4af37';
-          ctx.fill();
-        } else if (this.type === 'petal') {
-          ctx.translate(this.x, this.y);
-          ctx.rotate(this.angle);
-          ctx.beginPath();
-          ctx.ellipse(0, 0, this.size, this.size * 0.55, 0, 0, Math.PI * 2);
-          ctx.fillStyle = this.color;
-          ctx.shadowBlur = 3;
-          ctx.shadowColor = 'rgba(0,0,0,0.05)';
-          ctx.fill();
-        } else if (this.type === 'confetti') {
-          ctx.translate(this.x, this.y);
-          ctx.rotate(this.angle);
-          ctx.fillStyle = this.color;
-          ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size * 0.7);
-        }
-        ctx.restore();
       }
     }
 
-    for (let i = 0; i < 30; i++) particles.push(new Particle('dust'));
-    for (let i = 0; i < 14; i++) particles.push(new Particle('petal'));
+    const isMobileDevice = window.innerWidth < 640;
+    const dustCount = isMobileDevice ? 18 : 28;
+    const petalCount = isMobileDevice ? 8 : 12;
+
+    for (let i = 0; i < dustCount; i++) particles.push(new Particle('dust'));
+    for (let i = 0; i < petalCount; i++) particles.push(new Particle('petal'));
 
     function triggerConfettiBurst(originX, originY) {
-      for (let i = 0; i < 40; i++) {
+      for (let i = 0; i < 35; i++) {
         const p = new Particle('confetti');
         p.x = originX;
         p.y = originY;
-        p.speedX = (Math.random() - 0.5) * 10;
-        p.speedY = (Math.random() - 0.8) * 12;
+        p.speedX = (Math.random() - 0.5) * 9;
+        p.speedY = (Math.random() - 0.8) * 11;
         particles.push(p);
       }
     }
 
     function animateParticles() {
+      if (!isPageVisible) return;
       ctx.clearRect(0, 0, width, height);
-      particles.forEach((p, index) => {
+
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
         p.update();
-        p.draw();
-        if (p.type === 'confetti' && p.y > height + 20) {
-          particles.splice(index, 1);
+
+        if (p.type === 'dust') {
+          ctx.globalAlpha = p.alpha;
+          ctx.fillStyle = p.color;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, 6.28318);
+          ctx.fill();
+        } else if (p.type === 'petal') {
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.angle);
+          ctx.beginPath();
+          ctx.ellipse(0, 0, p.size, p.size * 0.55, 0, 0, 6.28318);
+          ctx.fillStyle = p.color;
+          ctx.fill();
+          ctx.restore();
+        } else if (p.type === 'confetti') {
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.angle);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.7);
+          ctx.restore();
+
+          if (p.y > height + 25 || p.x < -25 || p.x > width + 25) {
+            particles.splice(i, 1);
+          }
         }
-      });
-      requestAnimationFrame(animateParticles);
+      }
+
+      animId = requestAnimationFrame(animateParticles);
     }
-    animateParticles();
+    animId = requestAnimationFrame(animateParticles);
+
+    document.addEventListener('visibilitychange', () => {
+      isPageVisible = !document.hidden;
+      if (isPageVisible) {
+        if (!animId) animId = requestAnimationFrame(animateParticles);
+      } else {
+        if (animId) {
+          cancelAnimationFrame(animId);
+          animId = null;
+        }
+      }
+    }, { passive: true });
 
     document.getElementById('petalToggleBtn').addEventListener('click', function () {
       petalsActive = !petalsActive;
       this.classList.toggle('active', petalsActive);
       if (!petalsActive) {
-        particles = particles.filter(p => p.type === 'dust');
+        particles = particles.filter(p => p.type !== 'petal');
         showToast('تم إيقاف تساقط الورد 🌸');
       } else {
-        for (let i = 0; i < 14; i++) particles.push(new Particle('petal'));
+        const count = window.innerWidth < 640 ? 8 : 12;
+        for (let i = 0; i < count; i++) particles.push(new Particle('petal'));
         showToast('تم تفعيل تساقط الورد والبريق 🌸✨');
       }
     });
