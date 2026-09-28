@@ -1583,40 +1583,12 @@
       </div>
     </div>
 
-    <!-- 4. LIVRE D'OR ET TEHANI -->
-    <div class="embossed-panel">
-      <h2 class="panel-title">تهاني الضيوف ودعواتهم</h2>
-
-      <p
-        style="font-size: 13.5px; color: var(--text-muted); font-family: var(--font-arabic-kufi); margin-bottom: 14px;">
-        شاركونا فرحتنا بكلمة طيبة أو دعاء بالبركة للعروسين 🤍
-      </p>
-
-      <!-- Livre d'Or / تهاني مباشرة -->
-      <div class="wishes-wrapper">
-        <div class="wish-input-row">
-          <input type="text" id="guestWishInput" class="wish-input" placeholder="اكتب تهنئة للعروسين بالبركة...">
-          <button class="btn-embossed" id="sendWishBtn" style="padding: 10px 16px; border-radius: 12px;">
-            <i class="fa-solid fa-paper-plane"></i>
-          </button>
-        </div>
-
-        <div class="wishes-feed" id="wishesFeed">
-          <div class="wish-bubble">
-            <i class="fa-solid fa-heart"></i>
-            <span>بارك الله لكما وبارك عليكما وجمع بينكما في خير وسعادة 🤍</span>
-          </div>
-          <div class="wish-bubble">
-            <i class="fa-solid fa-heart"></i>
-            <span>ألف مبروك أنس وبشرى، زواج الدهر إن شاء الله ✨</span>
-          </div>
-        </div>
-
-        <button class="btn-embossed" id="copyLinkBtn" style="margin-top: 6px;">
-          <i class="fa-regular fa-copy"></i>
-          <span>نسخ رابط بطاقة الدعوة</span>
-        </button>
-      </div>
+    <!-- Bouton de copie et partage du lien de l'invitation -->
+    <div style="display: flex; justify-content: center; width: 100%; margin-top: 6px;">
+      <button class="btn-embossed" id="copyLinkBtn" style="max-width: 320px; width: 100%;">
+        <i class="fa-regular fa-copy"></i>
+        <span>نسخ رابط بطاقة الدعوة</span>
+      </button>
     </div>
 
     <!-- Vœu final -->
@@ -1938,32 +1910,7 @@
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    /* --------------------------------------------------------------------------
-       4. LIVRE D'OR (VOEUX DIRECTS)
-       -------------------------------------------------------------------------- */
-    const guestWishInput = document.getElementById('guestWishInput');
-    const sendWishBtn = document.getElementById('sendWishBtn');
-    const wishesFeed = document.getElementById('wishesFeed');
 
-    function submitWish() {
-      const text = guestWishInput.value.trim();
-      if (!text) return;
-
-      const bubble = document.createElement('div');
-      bubble.className = 'wish-bubble';
-      bubble.innerHTML = `<i class="fa-solid fa-heart"></i><span>${text}</span>`;
-
-      wishesFeed.prepend(bubble);
-      guestWishInput.value = '';
-
-      triggerConfettiBurst(window.innerWidth / 2, window.innerHeight * 0.7);
-      showToast('تمت إضافة تهنئتكم المباركة! ✨');
-    }
-
-    sendWishBtn.addEventListener('click', submitWish);
-    guestWishInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') submitWish();
-    });
 
     /* --------------------------------------------------------------------------
        7. COPIE DU LIEN & NOTIFICATION TOAST
