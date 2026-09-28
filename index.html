@@ -871,7 +871,7 @@
       }
     }
     /* ==========================================================================
-       ÉCRAN D'ACCUEIL : LETTRE ROYALE FERMÉE & ANIMATION D'OUVERTURE
+       ÉCRAN D'ACCUEIL : LETTRE ROYALE FERMÉE (PHOTORÉALISTE & TAMPON OR 3D)
        ========================================================================== */
     .letter-intro-overlay {
       position: fixed;
@@ -880,16 +880,27 @@
       width: 100%;
       height: 100%;
       background:
-        radial-gradient(circle at 50% 35%, rgba(255, 255, 255, 0.7) 0%, transparent 65%),
-        linear-gradient(135deg, #dfdbd1 0%, #cec8bc 100%);
+        radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.96) 0%, rgba(250, 247, 240, 0.88) 50%, rgba(234, 227, 216, 0.96) 100%),
+        #eee9df;
       z-index: 9999;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 16px;
+      padding: 18px 16px;
       overflow-y: auto;
       transition: opacity 0.85s cubic-bezier(0.4, 0, 0.2, 1), transform 0.85s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s 0.85s;
+    }
+
+    .letter-intro-overlay::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 20px 20px, rgba(201, 158, 75, 0.08) 2px, transparent 2px),
+        radial-gradient(circle at 60px 60px, rgba(201, 158, 75, 0.05) 3px, transparent 3px);
+      background-size: 80px 80px;
+      pointer-events: none;
     }
 
     .letter-intro-overlay.hidden {
@@ -908,6 +919,8 @@
       gap: 16px;
       margin: auto 0;
       cursor: pointer;
+      position: relative;
+      z-index: 2;
     }
 
     /* En-tête au-dessus de la lettre */
@@ -916,27 +929,28 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 3px;
+      gap: 4px;
       user-select: none;
     }
 
     .letter-bismillah {
       font-family: var(--font-arabic-title);
-      font-size: clamp(17px, 3.8vw, 22px);
+      font-size: clamp(18px, 4vw, 24px);
       font-weight: 700;
       color: var(--text-gold-dark);
-      text-shadow: 0 1px 1px rgba(255, 255, 255, 0.95);
+      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.95);
+      letter-spacing: 0.5px;
     }
 
     .letter-royal-title {
       font-family: var(--font-arabic-kufi);
       font-size: 12px;
       font-weight: 700;
-      letter-spacing: 2.5px;
+      letter-spacing: 2px;
       color: var(--text-gold-primary);
-      background: rgba(255, 255, 255, 0.65);
-      border: 1px solid rgba(201, 158, 75, 0.4);
-      padding: 3px 18px;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(201, 158, 75, 0.45);
+      padding: 3px 20px;
       border-radius: 20px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
       margin: 2px 0;
@@ -944,180 +958,117 @@
 
     .letter-couple-names {
       font-family: var(--font-arabic-title);
-      font-size: clamp(32px, 7vw, 44px);
+      font-size: clamp(34px, 7.5vw, 46px);
       font-weight: 700;
       background: var(--gold-metallic);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 2px 4px rgba(166, 124, 46, 0.25));
+      filter: drop-shadow(0 2px 4px rgba(166, 124, 46, 0.28));
       line-height: 1.2;
     }
 
     .letter-couple-names-fr {
       font-family: var(--font-eng-script);
-      font-size: clamp(24px, 5vw, 30px);
+      font-size: clamp(24px, 5.2vw, 32px);
       color: var(--text-gold-dark);
       margin-top: -6px;
       direction: ltr;
-      text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
+      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.85);
     }
 
-    /* Boîte de l'enveloppe 3D */
+    /* Boîte de l'enveloppe photoréaliste */
     .envelope-box {
       position: relative;
       width: 100%;
-      aspect-ratio: 1.45 / 1;
-      max-width: 400px;
+      max-width: 440px;
+      aspect-ratio: 800 / 597;
       perspective: 1200px;
       perspective-origin: center top;
-      filter: drop-shadow(0 22px 45px rgba(0, 0, 0, 0.22)) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.1));
-      transition: transform 0.3s ease;
+      filter: drop-shadow(0 22px 45px rgba(90, 75, 55, 0.25)) drop-shadow(0 6px 14px rgba(0, 0, 0, 0.1));
+      transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
       user-select: none;
+      border-radius: 12px;
     }
 
     .envelope-box:hover {
       transform: translateY(-4px) scale(1.015);
     }
 
-    /* Fond intérieur de l'enveloppe */
-    .envelope-back {
+    .envelope-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 12px;
+    }
+
+    /* Vue fermée de l'enveloppe */
+    .envelope-closed-layer {
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, #eae5d9 0%, #dbd4c4 100%);
+      z-index: 4;
       border-radius: 12px;
-      border: 1px solid rgba(197, 160, 89, 0.55);
-      box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.08);
+      transition: opacity 0.55s ease 0.15s, transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Vue ouverte de l'enveloppe */
+    .envelope-open-layer {
+      position: absolute;
+      inset: 0;
       z-index: 1;
-    }
-
-    /* Carte à l'intérieur */
-    .envelope-card-peek {
-      position: absolute;
-      top: 6px;
-      left: 6%;
-      right: 6%;
-      height: 90%;
-      background: radial-gradient(circle at center, #fbfaf8 0%, #f7f5f0 100%);
-      border-radius: 8px;
-      border: 1.5px solid rgba(197, 160, 89, 0.5);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12), inset 0 0 12px rgba(255, 255, 255, 0.95);
-      z-index: 2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 16px;
-      transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .peek-inner {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 3px;
-    }
-
-    .peek-verse {
-      font-family: var(--font-arabic-body);
-      font-size: 11px;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-
-    .peek-names {
-      font-family: var(--font-arabic-title);
-      font-size: 21px;
-      font-weight: 700;
-      color: var(--text-gold-dark);
-    }
-
-    .peek-date {
-      font-family: var(--font-eng-serif);
-      font-size: 13.5px;
-      font-weight: 700;
-      color: var(--text-gold-primary);
-      letter-spacing: 2px;
-    }
-
-    /* Poche avant de l'enveloppe */
-    .envelope-pocket {
-      position: absolute;
-      inset: 0;
-      z-index: 3;
-      pointer-events: none;
       border-radius: 12px;
-      overflow: hidden;
+      opacity: 0;
+      transform: scale(0.97);
+      transition: opacity 0.55s ease 0.15s, transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .envelope-pocket::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 60%;
-      background: linear-gradient(180deg, #f7f4ed 0%, #ece5d9 100%);
-      clip-path: polygon(0% 100%, 50% 28%, 100% 100%);
-      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);
-      border-bottom: 1.5px solid rgba(197, 160, 89, 0.5);
-    }
-
-    .envelope-pocket::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, #f5f1e8 0%, #eae3d5 100%);
-      clip-path: polygon(0% 0%, 54% 50%, 0% 100%, 100% 100%, 46% 50%, 100% 0%);
-      opacity: 0.96;
-    }
-
-    /* Rabat supérieur triangulaire (FLAP) */
-    .envelope-flap {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 58%;
-      background: linear-gradient(180deg, #fdfcf9 0%, #f3ede2 100%);
-      clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
-      transform-origin: top center;
-      transform-style: preserve-3d;
-      transition: transform 0.85s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.2s ease 0.4s;
-      z-index: 5;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-    }
-
-    .flap-gold-trim {
-      position: absolute;
-      inset: 0;
-      clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
-      border-bottom: 2px solid rgba(197, 160, 89, 0.6);
-      pointer-events: none;
-    }
-
-    /* Sceau de cire doré */
+    /* Le Tampon / Sceau de Cire Doré Royal Photoréaliste */
     .envelope-wax-seal {
       position: absolute;
-      top: 58%;
+      top: 62.5%;
       left: 50%;
       transform: translate(-50%, -50%);
+      width: clamp(92px, 22vw, 118px);
+      height: clamp(92px, 22vw, 118px);
       z-index: 6;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.45s ease;
+      transition: transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.35s ease;
+    }
+
+    .seal-stamp-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 10px 22px rgba(112, 70, 12, 0.48)) drop-shadow(0 3px 6px rgba(0, 0, 0, 0.25));
+      animation: sealGentlyPulse 2.8s infinite ease-in-out;
+      transition: transform 0.25s ease;
+    }
+
+    .envelope-box:hover .seal-stamp-img {
+      transform: scale(1.08) rotate(3deg);
     }
 
     .seal-halo-pulse {
       position: absolute;
-      width: 105px;
-      height: 105px;
+      width: 115%;
+      height: 115%;
       border-radius: 50%;
       border: 2px solid rgba(212, 175, 55, 0.75);
       animation: sealHalo 2.2s infinite ease-out;
       pointer-events: none;
+    }
+
+    @keyframes sealGentlyPulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
     }
 
     @keyframes sealHalo {
@@ -1131,66 +1082,89 @@
       }
     }
 
-    .seal-stamp-gold {
-      width: 84px;
-      height: 84px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 35% 35%, #ffd778 0%, #d4af37 35%, #996515 80%, #70460c 100%);
-      border: 2.5px double rgba(255, 246, 219, 0.9);
-      box-shadow:
-        0 8px 22px rgba(112, 70, 12, 0.45),
-        0 2px 6px rgba(0, 0, 0, 0.2),
-        inset 0 2px 4px rgba(255, 255, 255, 0.8),
-        inset 0 -3px 6px rgba(0, 0, 0, 0.4);
+    /* Carte élégante qui émerge de l'enveloppe */
+    .envelope-card-peek {
+      position: absolute;
+      top: 14%;
+      left: 8%;
+      right: 8%;
+      height: 76%;
+      background: radial-gradient(circle at center, #ffffff 0%, #faf8f2 100%);
+      border-radius: 8px;
+      border: 1.5px solid rgba(197, 160, 89, 0.65);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.16), inset 0 0 16px rgba(255, 255, 255, 0.95);
+      z-index: 2;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: transform 0.25s ease;
-      animation: sealBounce 2.6s infinite ease-in-out;
-    }
-
-    @keyframes sealBounce {
-      0%, 100% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.06);
-      }
-    }
-
-    .envelope-box:hover .seal-stamp-gold {
-      transform: scale(1.1) rotate(4deg);
-    }
-
-    .seal-stamp-inner {
       text-align: center;
-      color: #fff9ea;
-      text-shadow: 0 1px 2px rgba(90, 50, 5, 0.85);
+      padding: 16px 14px;
+      opacity: 0;
+      transform: translateY(25px) scale(0.95);
+      transition: transform 0.95s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s, opacity 0.5s ease 0.25s;
+    }
+
+    .peek-inner {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 1px;
+      gap: 4px;
     }
 
-    .seal-initials {
-      font-family: var(--font-eng-royal);
-      font-size: 16px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      line-height: 1;
+    .peek-verse {
+      font-family: var(--font-arabic-body);
+      font-size: clamp(9px, 2.1vw, 11.5px);
+      color: var(--text-muted);
+      line-height: 1.4;
+      max-width: 90%;
     }
 
-    .seal-icon {
-      font-size: 11px;
-      line-height: 1;
-      margin: 1px 0;
-    }
-
-    .seal-arabic {
+    .peek-names {
       font-family: var(--font-arabic-title);
-      font-size: 11.5px;
+      font-size: clamp(20px, 4.8vw, 26px);
       font-weight: 700;
-      line-height: 1.1;
+      background: var(--gold-metallic);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.2;
+    }
+
+    .peek-date {
+      font-family: var(--font-eng-serif);
+      font-size: clamp(12.5px, 2.7vw, 15px);
+      font-weight: 700;
+      color: var(--text-gold-primary);
+      letter-spacing: 2.5px;
+    }
+
+    .peek-venue {
+      font-family: var(--font-arabic-kufi);
+      font-size: clamp(10px, 2.2vw, 12px);
+      color: var(--text-gold-dark);
+      font-weight: 700;
+    }
+
+    /* Animation quand la lettre s'ouvre */
+    .envelope-box.is-opening .envelope-wax-seal {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(1.4) rotate(-8deg);
+      pointer-events: none;
+    }
+
+    .envelope-box.is-opening .envelope-closed-layer {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+
+    .envelope-box.is-opening .envelope-open-layer {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .envelope-box.is-opening .envelope-card-peek {
+      opacity: 1;
+      transform: translateY(-88px) scale(1.05);
     }
 
     /* Bouton d'instruction sous la lettre */
@@ -1198,8 +1172,8 @@
       background: rgba(255, 255, 255, 0.94);
       border: 1.5px solid rgba(197, 160, 89, 0.7);
       border-radius: 28px;
-      padding: 9px 24px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1), inset 0 1px 0 #fff;
+      padding: 10px 26px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1), inset 0 1px 0 #fff;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -1213,53 +1187,34 @@
     @keyframes pulsePrompt {
       0%, 100% {
         transform: translateY(0);
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
       }
       50% {
         transform: translateY(-3px);
-        box-shadow: 0 10px 25px rgba(166, 124, 46, 0.3);
+        box-shadow: 0 12px 28px rgba(166, 124, 46, 0.35);
         border-color: var(--text-gold-primary);
       }
     }
 
     .prompt-text-ar {
       font-family: var(--font-arabic-kufi);
-      font-size: 14px;
+      font-size: 14.5px;
       font-weight: 700;
       color: var(--text-gold-dark);
     }
 
     .prompt-text-fr {
       font-family: var(--font-eng-serif);
-      font-size: 11.5px;
+      font-size: 12px;
       font-style: italic;
       color: var(--text-muted);
     }
 
     .prompt-icon {
-      font-size: 13px;
+      font-size: 14px;
       color: var(--text-gold-primary);
       margin-top: 1px;
       animation: bounceDown 1.6s infinite;
-    }
-
-    /* Animation d'ouverture active */
-    .envelope-box.is-opening .envelope-flap {
-      transform: rotateX(180deg);
-      z-index: 1;
-      transition: transform 0.85s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .envelope-box.is-opening .envelope-wax-seal {
-      opacity: 0;
-      transform: translate(-50%, -50%) scale(1.4);
-      transition: opacity 0.4s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-      pointer-events: none;
-    }
-
-    .envelope-box.is-opening .envelope-card-peek {
-      transform: translateY(-85px);
-      transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1) 0.35s;
     }
   </style>
 </head>
@@ -1267,7 +1222,7 @@
 <body>
 
   <!-- ==========================================================================
-       ÉCRAN D'ACCUEIL : LETTRE ROYALE FERMÉE (FULLSCREEN ENVELOPE INTRO)
+       ÉCRAN D'ACCUEIL : LETTRE ROYALE FERMÉE (PHOTORÉALISTE & TAMPON D'OR)
        ========================================================================== -->
   <div class="letter-intro-overlay" id="letterIntroScreen">
     <div class="letter-container" id="letterContainer">
@@ -1280,37 +1235,32 @@
         <div class="letter-couple-names-fr">Anes &amp; Bouchra</div>
       </div>
 
-      <!-- La Lettre / Enveloppe Royale 3D -->
+      <!-- La Lettre / Enveloppe Royale Photoréaliste -->
       <div class="envelope-box" id="envelopeBox">
-        <!-- Dos de l'enveloppe -->
-        <div class="envelope-back"></div>
 
-        <!-- Carte/Faire-part qui glisse à l'intérieur -->
-        <div class="envelope-card-peek">
+        <!-- Vue Enveloppe Ouverte (Sous la vue fermée) -->
+        <div class="envelope-open-layer">
+          <img src="assets/open_envelope_opt.jpg" alt="Enveloppe Ouverte" class="envelope-img">
+        </div>
+
+        <!-- Carte d'invitation qui émerge de l'intérieur lors de l'ouverture -->
+        <div class="envelope-card-peek" id="envelopeCardPeek">
           <div class="peek-inner">
-            <span class="peek-verse">﴿ وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا ﴾</span>
+            <span class="peek-verse">﴿ وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا ﴾</span>
             <span class="peek-names">أنس &amp; بشرى</span>
-            <span class="peek-date">07.10.2026</span>
+            <span class="peek-date">07 . 10 . 2026</span>
+            <span class="peek-venue">قاعة الحفلات أمير برستيج</span>
           </div>
         </div>
 
-        <!-- Rabat inférieur (poche) et côtés de l'enveloppe -->
-        <div class="envelope-pocket"></div>
+        <!-- Vue Enveloppe Fermée (Au-dessus avec le sceau de cire d'or) -->
+        <div class="envelope-closed-layer" id="envelopeClosedLayer">
+          <img src="assets/closed_envelope_opt.jpg" alt="Lettre Fermée" class="envelope-img">
 
-        <!-- Rabat supérieur triangulaire (fermé au départ, bascule en 3D à l'ouverture) -->
-        <div class="envelope-flap" id="envelopeFlap">
-          <div class="flap-gold-trim"></div>
-        </div>
-
-        <!-- Sceau de cire doré scellant la lettre -->
-        <div class="envelope-wax-seal" id="envelopeSeal">
-          <div class="seal-halo-pulse"></div>
-          <div class="seal-stamp-gold">
-            <div class="seal-stamp-inner">
-              <span class="seal-initials">A &amp; B</span>
-              <span class="seal-icon">💍</span>
-              <span class="seal-arabic">أنس &amp; بشرى</span>
-            </div>
+          <!-- Le Tampon / Sceau de Cire Doré Royal Photoréaliste -->
+          <div class="envelope-wax-seal" id="envelopeSeal">
+            <div class="seal-halo-pulse"></div>
+            <img src="assets/gold_seal_optimized.png" alt="Sceau Royal A&B" class="seal-stamp-img">
           </div>
         </div>
 
@@ -2049,12 +1999,12 @@
         triggerConfettiBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
       }
 
-      // 4. Après la révélation de la lettre, fondu doux vers la page complète
+      // 4. Après l'émergence majestueuse de la carte, fondu doux vers la page complète
       setTimeout(() => {
         letterIntroScreen.classList.add('hidden');
         showToast('مرحباً بكم في حفل زفاف أنس & بشرى 🤍✨');
         isLetterOpening = false;
-      }, 1250);
+      }, 1400);
     }
 
     function closeWeddingLetter() {
