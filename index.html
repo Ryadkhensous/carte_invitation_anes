@@ -161,14 +161,15 @@
       max-width: 520px;
       aspect-ratio: 9 / 16;
       background: radial-gradient(circle at center, #fbfaf8 0%, #f1efe9 70%, #e7e4dc 100%);
-      border-radius: 6px;
+      border-radius: 8px;
       box-shadow:
-        0 20px 50px rgba(0, 0, 0, 0.18),
-        0 4px 12px rgba(0, 0, 0, 0.08),
-        inset 0 0 40px rgba(255, 255, 255, 0.9);
+        0 28px 65px -15px rgba(85, 70, 50, 0.22),
+        0 10px 25px -4px rgba(60, 45, 30, 0.1),
+        0 2px 6px rgba(0, 0, 0, 0.04),
+        inset 0 0 45px rgba(255, 255, 255, 0.95);
       overflow: hidden;
       margin: 0 auto;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     /* Bordure extérieure en dentelle gaufrée */
@@ -194,13 +195,13 @@
       border-radius: 90px / 110px;
       background-color: #f7f6f2;
       box-shadow:
-        /* Effet relief creusé/gaufré */
-        inset 3px 3px 6px rgba(195, 190, 180, 0.55),
+        /* Effet relief creusé/gaufré adouci */
+        inset 3px 3px 6px rgba(185, 175, 160, 0.45),
         inset -3px -3px 6px rgba(255, 255, 255, 0.95),
         0 0 0 6px #f3f1ec,
-        0 0 0 8px rgba(205, 200, 190, 0.45),
+        0 0 0 8px rgba(205, 195, 180, 0.4),
         0 0 0 15px #f7f5f0,
-        0 4px 14px rgba(180, 175, 165, 0.35);
+        0 6px 18px rgba(140, 125, 105, 0.25);
       overflow: hidden;
       display: flex;
       justify-content: center;
@@ -364,24 +365,32 @@
       gap: 12px;
     }
 
-    .gold-ring-icon {
-      font-size: clamp(20px, 4vw, 26px);
-      -webkit-text-fill-color: initial;
+    .realistic-ring-img {
+      width: clamp(26px, 5.5vw, 36px);
+      height: clamp(26px, 5.5vw, 36px);
+      object-fit: contain;
+      vertical-align: middle;
       display: inline-block;
-      animation: softTwinkle 2.5s infinite ease-in-out;
+      margin: 0 4px;
+      filter: drop-shadow(0 4px 8px rgba(184, 134, 40, 0.45)) drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
+      animation: ringGleam 3s infinite ease-in-out;
+      transform-origin: center center;
     }
 
-    @keyframes softTwinkle {
+    .realistic-ring-img.ring-letter {
+      width: clamp(28px, 6vw, 40px);
+      height: clamp(28px, 6vw, 40px);
+      margin: 0 8px;
+    }
 
-      0%,
-      100% {
+    @keyframes ringGleam {
+      0%, 100% {
         transform: scale(1) rotate(0deg);
-        opacity: 0.9;
+        filter: drop-shadow(0 4px 8px rgba(184, 134, 40, 0.45)) drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
       }
-
       50% {
-        transform: scale(1.15) rotate(5deg);
-        opacity: 1;
+        transform: scale(1.1) rotate(4deg);
+        filter: drop-shadow(0 6px 14px rgba(212, 175, 55, 0.75)) drop-shadow(0 0 12px rgba(255, 235, 160, 0.85));
       }
     }
 
@@ -539,8 +548,9 @@
       border-radius: 20px;
       border: 1px solid rgba(210, 206, 196, 0.7);
       box-shadow:
-        0 12px 30px rgba(0, 0, 0, 0.08),
-        inset 0 0 25px rgba(255, 255, 255, 0.9);
+        0 18px 45px -12px rgba(85, 70, 50, 0.14),
+        0 4px 14px -2px rgba(60, 45, 30, 0.05),
+        inset 0 0 30px rgba(255, 255, 255, 0.95);
       padding: 24px 20px;
       text-align: center;
       overflow: hidden;
@@ -694,8 +704,8 @@
       height: 180px;
       border-radius: 14px;
       overflow: hidden;
-      border: 1px solid rgba(201, 158, 75, 0.4);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(201, 158, 75, 0.45);
+      box-shadow: 0 8px 24px -4px rgba(70, 55, 35, 0.16), 0 2px 6px rgba(0, 0, 0, 0.04);
       position: relative;
     }
 
@@ -966,6 +976,10 @@
       -webkit-text-fill-color: transparent;
       filter: drop-shadow(0 2px 4px rgba(166, 124, 46, 0.28));
       line-height: 1.2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
     }
 
     .letter-couple-names-fr {
@@ -1231,7 +1245,11 @@
       <div class="letter-header-titles">
         <div class="letter-bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
         <div class="letter-royal-title">دعوة زفاف خاصة</div>
-        <div class="letter-couple-names">أنس 💍 بشرى</div>
+        <div class="letter-couple-names">
+          <span>أنس</span>
+          <img src="assets/wedding_ring.png" alt="Alliance" class="realistic-ring-img ring-letter">
+          <span>بشرى</span>
+        </div>
         <div class="letter-couple-names-fr">Anes &amp; Bouchra</div>
       </div>
 
@@ -1438,7 +1456,7 @@
         <div class="couple-hero">
           <h1 class="couple-names-ar">
             <span>أنس</span>
-            <span class="gold-ring-icon">💍</span>
+            <img src="assets/wedding_ring.png" alt="Alliance diamant" class="realistic-ring-img">
             <span>بشرى</span>
           </h1>
           <div class="couple-names-fr">Anes &amp; Bouchra</div>
