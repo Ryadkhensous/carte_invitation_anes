@@ -1059,13 +1059,8 @@
             <span>موقع القاعة (Google Maps)</span>
           </a>
 
-          <button class="btn-embossed" id="addToCalBtnCard">
-            <i class="fa-regular fa-calendar-plus"></i>
-            <span>حفظ الموعد في التقويم</span>
-          </button>
-
           <a href="#detailsSection" class="details-scroll-btn">
-            <span>عرض البرنامج وباقي التفاصيل</span>
+            <span>عرض باقي التفاصيل</span>
             <i class="fa-solid fa-chevron-down"></i>
           </a>
         </div>
@@ -1221,53 +1216,9 @@
           <span class="time-lbl ar">ثانية</span>
         </div>
       </div>
-
-      <button class="btn-embossed" id="addToCalBtn" style="margin: 8px auto 0;">
-        <i class="fa-regular fa-calendar-plus"></i>
-        <span>حفظ الموعد في التقويم (Google / Apple)</span>
-      </button>
     </div>
 
-    <!-- 2. PROGRAMME DU MARIAGE (TIMELINE) -->
-    <div class="embossed-panel">
-      <h2 class="panel-title">برنامج الحفل</h2>
-
-      <div class="wedding-timeline">
-        <div class="timeline-row">
-          <div class="timeline-hour">18:00</div>
-          <div class="timeline-text">
-            <div class="timeline-title-ar">استقبال والترحيب بالضيوف الكرام</div>
-            <div class="timeline-sub-fr">Accueil chaleureux des invités</div>
-          </div>
-        </div>
-
-        <div class="timeline-row">
-          <div class="timeline-hour">19:30</div>
-          <div class="timeline-text">
-            <div class="timeline-title-ar">الزفة والدخول الملكي للعروسين</div>
-            <div class="timeline-sub-fr">Entrée solennelle des mariés</div>
-          </div>
-        </div>
-
-        <div class="timeline-row">
-          <div class="timeline-hour">20:30</div>
-          <div class="timeline-text">
-            <div class="timeline-title-ar">مأدبة العشاء الفاخرة</div>
-            <div class="timeline-sub-fr">Dîner de réception gastronomique</div>
-          </div>
-        </div>
-
-        <div class="timeline-row">
-          <div class="timeline-hour">22:00</div>
-          <div class="timeline-text">
-            <div class="timeline-title-ar">تقطيع الكعكة وأخذ الصور التذكارية</div>
-            <div class="timeline-sub-fr">Pièce montée &amp; Séance photos</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 3. LIEU DE RÉCEPTION & SALLE AMIR PRESTIGE -->
+    <!-- 2. LIEU DE RÉCEPTION & SALLE AMIR PRESTIGE -->
     <div class="embossed-panel">
       <h2 class="panel-title">قاعة الحفلات أمير برستيج</h2>
 
@@ -1658,29 +1609,7 @@
     updateCountdown();
 
     /* --------------------------------------------------------------------------
-       4. CALENDRIER GOOGLE / ICAL
-       -------------------------------------------------------------------------- */
-    document.getElementById('addToCalBtn').addEventListener('click', () => {
-      const title = encodeURIComponent("حفل زفاف أنس & بشرى | Mariage Anes & Bouchra");
-      const details = encodeURIComponent("يسعدنا ويشرفنا حضوركم لمشاركتنا فرحة العمر بقاعة الحفلات أمير برستيج (Amir Prestige)");
-      const location = encodeURIComponent("قاعة الحفلات أمير برستيج (Salle des fêtes Amir Prestige)");
-      const startDate = "20261007T170000Z";
-      const endDate = "20261007T230000Z";
-
-      const googleCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDate}/${endDate}&details=${details}&location=${location}`;
-      window.open(googleCalUrl, '_blank');
-      showToast('جاري فتح الموعد في التقويم... 📅');
-    });
-
-    const addToCalBtnCard = document.getElementById('addToCalBtnCard');
-    if (addToCalBtnCard) {
-      addToCalBtnCard.addEventListener('click', () => {
-        document.getElementById('addToCalBtn').click();
-      });
-    }
-
-    /* --------------------------------------------------------------------------
-       6. LIVRE D'OR (VOEUX DIRECTS)
+       4. LIVRE D'OR (VOEUX DIRECTS)
        -------------------------------------------------------------------------- */
     const guestWishInput = document.getElementById('guestWishInput');
     const sendWishBtn = document.getElementById('sendWishBtn');
