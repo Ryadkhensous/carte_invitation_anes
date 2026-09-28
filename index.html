@@ -870,6 +870,320 @@
         font-size: 15px;
       }
     }
+    /* ==========================================================================
+       PORTE ROYALE GAUFRÉE & ANIMATION D'OUVERTURE 3D FLUIDE
+       ========================================================================== */
+    .card-gate-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 50;
+      display: flex;
+      perspective: 1400px;
+      perspective-origin: center center;
+      transition: visibility 0s 1.4s;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .gate-door {
+      width: 50%;
+      height: 100%;
+      background: radial-gradient(circle at center, #fbfaf8 0%, #f4f0e6 65%, #eae4d6 100%);
+      position: relative;
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+      transition: transform 1.35s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease 0.85s;
+      overflow: hidden;
+    }
+
+    .gate-door-left {
+      transform-origin: left center;
+      border-right: 1.5px solid rgba(197, 160, 89, 0.7);
+      box-shadow: 6px 0 20px rgba(0, 0, 0, 0.12);
+    }
+
+    .gate-door-right {
+      transform-origin: right center;
+      border-left: 1.5px solid rgba(255, 255, 255, 0.95);
+      box-shadow: -6px 0 20px rgba(0, 0, 0, 0.12);
+    }
+
+    .gate-panel-inner {
+      position: absolute;
+      inset: 12px;
+      border: 1.5px solid rgba(197, 160, 89, 0.45);
+      background: rgba(255, 255, 255, 0.45);
+      box-shadow:
+        inset 2px 2px 6px rgba(255, 255, 255, 0.95),
+        inset -2px -2px 6px rgba(195, 190, 180, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gate-door-left .gate-panel-inner {
+      margin-right: 4px;
+      border-radius: 14px 0 0 14px;
+    }
+
+    .gate-door-right .gate-panel-inner {
+      margin-left: 4px;
+      border-radius: 0 14px 14px 0;
+    }
+
+    /* Cadre intérieur avec arche royale */
+    .gate-arch-frame {
+      position: absolute;
+      top: 9%;
+      bottom: 9%;
+      left: 10%;
+      right: 10%;
+      border: 1.5px dashed rgba(184, 134, 40, 0.35);
+      border-radius: 50px / 70px;
+      pointer-events: none;
+    }
+
+    .gate-filigree {
+      position: absolute;
+      width: 42px;
+      height: 42px;
+      opacity: 0.75;
+      pointer-events: none;
+    }
+
+    .gate-filigree-top {
+      top: 8px;
+      background: radial-gradient(circle, rgba(197, 160, 89, 0.35) 0%, transparent 70%);
+      border-top: 2px solid rgba(197, 160, 89, 0.5);
+    }
+
+    .gate-filigree-bottom {
+      bottom: 8px;
+      background: radial-gradient(circle, rgba(197, 160, 89, 0.35) 0%, transparent 70%);
+      border-bottom: 2px solid rgba(197, 160, 89, 0.5);
+    }
+
+    .gate-door-left .gate-filigree {
+      left: 8px;
+      border-left: 2px solid rgba(197, 160, 89, 0.5);
+      border-radius: 6px 0 0 0;
+    }
+
+    .gate-door-right .gate-filigree {
+      right: 8px;
+      border-right: 2px solid rgba(197, 160, 89, 0.5);
+      border-radius: 0 6px 0 0;
+    }
+
+    /* Poignée royale en laiton doré */
+    .gate-handle-plate {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 24px;
+      height: 55px;
+      background: var(--gold-metallic);
+      border-radius: 5px;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    .gate-door-left .gate-handle-plate {
+      right: 6px;
+    }
+
+    .gate-door-right .gate-handle-plate {
+      left: 6px;
+    }
+
+    .gate-handle-ring {
+      width: 16px;
+      height: 24px;
+      border: 2.5px solid #6b4d16;
+      border-radius: 10px;
+      background: transparent;
+      box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.6);
+    }
+
+    /* Sceau Royal au centre */
+    .gate-seal-wrapper {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 60;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+      user-select: none;
+    }
+
+    .gate-seal-pulse-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 115px;
+      height: 115px;
+      border-radius: 50%;
+      border: 2px solid rgba(212, 175, 55, 0.7);
+      animation: sealPulseRing 2.2s infinite ease-out;
+      pointer-events: none;
+    }
+
+    @keyframes sealPulseRing {
+      0% {
+        transform: translate(-50%, -50%) scale(0.85);
+        opacity: 0.95;
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(1.45);
+        opacity: 0;
+      }
+    }
+
+    .gate-wax-seal {
+      width: 95px;
+      height: 95px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #ffd778 0%, #d4af37 35%, #996515 80%, #70460c 100%);
+      box-shadow:
+        0 10px 25px rgba(112, 70, 12, 0.4),
+        0 2px 6px rgba(0, 0, 0, 0.2),
+        inset 0 2px 4px rgba(255, 255, 255, 0.8),
+        inset 0 -3px 6px rgba(0, 0, 0, 0.45);
+      border: 3px double rgba(255, 246, 219, 0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+      animation: sealBreath 2.8s infinite ease-in-out;
+    }
+
+    @keyframes sealBreath {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
+
+    .gate-wax-seal:hover {
+      transform: scale(1.1) rotate(3deg);
+    }
+
+    .seal-center-crest {
+      text-align: center;
+      color: #fff8e8;
+      text-shadow: 0 1px 2px rgba(90, 50, 5, 0.8);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1px;
+    }
+
+    .seal-monogram-top {
+      font-family: var(--font-eng-royal);
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      line-height: 1;
+    }
+
+    .seal-rings-icon {
+      font-size: 13px;
+      line-height: 1;
+      margin: 1px 0;
+    }
+
+    .seal-names-ar {
+      font-family: var(--font-arabic-title);
+      font-size: 12.5px;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: 0.5px;
+    }
+
+    /* Badge d'invitation à cliquer */
+    .gate-open-badge {
+      background: rgba(255, 255, 255, 0.95);
+      border: 1.5px solid rgba(197, 160, 89, 0.8);
+      border-radius: 25px;
+      padding: 7px 18px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15), inset 0 1px 0 #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      backdrop-filter: blur(8px);
+      transition: all 0.3s ease;
+    }
+
+    .gate-seal-wrapper:hover .gate-open-badge {
+      transform: translateY(-2px);
+      border-color: var(--text-gold-primary);
+      box-shadow: 0 8px 22px rgba(166, 124, 46, 0.35);
+    }
+
+    .open-txt-ar {
+      font-family: var(--font-arabic-kufi);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-gold-dark);
+    }
+
+    .open-txt-fr {
+      font-family: var(--font-eng-serif);
+      font-size: 11px;
+      font-style: italic;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+    }
+
+    .open-icon {
+      font-size: 12px;
+      color: var(--text-gold-primary);
+      margin-top: 1px;
+      animation: openBounce 1.5s infinite;
+    }
+
+    @keyframes openBounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(3px);
+      }
+    }
+
+    /* État OUVERT (Animation ultra-fluide 3D) */
+    .card-gate-overlay.opened {
+      pointer-events: none;
+      visibility: hidden;
+    }
+
+    .card-gate-overlay.opened .gate-door-left {
+      transform: rotateY(-118deg);
+      opacity: 0;
+    }
+
+    .card-gate-overlay.opened .gate-door-right {
+      transform: rotateY(118deg);
+      opacity: 0;
+    }
+
+    .card-gate-overlay.opened .gate-seal-wrapper {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(1.4);
+      pointer-events: none;
+    }
   </style>
 </head>
 
@@ -886,6 +1200,9 @@
   <div class="floating-toolbar">
     <button class="tool-btn" id="musicToggleBtn" title="تشغيل / إيقاف الموسيقى">
       <i class="fa-solid fa-music"></i>
+    </button>
+    <button class="tool-btn" id="gateToggleBtn" title="إعادة فتح / غلق بطاقة الدعوة">
+      <i class="fa-solid fa-envelope"></i>
     </button>
     <button class="tool-btn active" id="petalToggleBtn" title="تساقط الورد والبريق">
       <i class="fa-solid fa-wand-magic-sparkles"></i>
@@ -1088,6 +1405,50 @@
 
     <!-- Bouquet de roses blanches réalistes d'angle en bas à gauche -->
     <img src="assets/corner_roses.jpg" alt="Roses d'angle" class="bottom-left-flowers">
+
+    <!-- PORTE ROYALE GAUFRÉE À DOUBLE BATTANT (GATEFOLD CARD) -->
+    <div class="card-gate-overlay" id="cardGateOverlay">
+      <!-- Battant Gauche -->
+      <div class="gate-door gate-door-left">
+        <div class="gate-panel-inner">
+          <div class="gate-arch-frame"></div>
+          <div class="gate-filigree gate-filigree-top"></div>
+          <div class="gate-filigree gate-filigree-bottom"></div>
+          <div class="gate-handle-plate">
+            <div class="gate-handle-ring"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Battant Droit -->
+      <div class="gate-door gate-door-right">
+        <div class="gate-panel-inner">
+          <div class="gate-arch-frame"></div>
+          <div class="gate-filigree gate-filigree-top"></div>
+          <div class="gate-filigree gate-filigree-bottom"></div>
+          <div class="gate-handle-plate">
+            <div class="gate-handle-ring"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sceau de Cire Royal et Bouton d'Ouverture Interactif -->
+      <div class="gate-seal-wrapper" id="gateSealBtn">
+        <div class="gate-seal-pulse-ring"></div>
+        <div class="gate-wax-seal">
+          <div class="seal-center-crest">
+            <div class="seal-monogram-top">A &amp; B</div>
+            <div class="seal-rings-icon">💍</div>
+            <div class="seal-names-ar">أنس &amp; بشرى</div>
+          </div>
+        </div>
+        <div class="gate-open-badge">
+          <span class="open-txt-ar">اضغط لفتح بطاقة الدعوة</span>
+          <span class="open-txt-fr">Cliquer pour ouvrir</span>
+          <i class="fa-solid fa-envelope-open-text open-icon"></i>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- ==========================================================================
@@ -1566,6 +1927,70 @@
         showToast('رابط الدعوة جاهز للمشاركة! ✨');
       });
     });
+
+    /* --------------------------------------------------------------------------
+       8. GESTION DE LA PORTE ROYALE & ANIMATION D'OUVERTURE
+       -------------------------------------------------------------------------- */
+    const cardGateOverlay = document.getElementById('cardGateOverlay');
+    const gateSealBtn = document.getElementById('gateSealBtn');
+    const gateToggleBtn = document.getElementById('gateToggleBtn');
+    let isGateOpen = false;
+
+    function openGate() {
+      if (isGateOpen) return;
+      isGateOpen = true;
+      cardGateOverlay.classList.add('opened');
+      if (gateToggleBtn) {
+        gateToggleBtn.innerHTML = '<i class="fa-solid fa-door-closed"></i>';
+        gateToggleBtn.title = "غلق بطاقة الدعوة";
+      }
+
+      // Déclencher la musique romantique au geste utilisateur
+      if (!isMusicPlaying) {
+        playMusic();
+      }
+
+      // Explosion festive d'étoiles dorées au centre de la carte
+      const rect = cardGateOverlay.getBoundingClientRect();
+      triggerConfettiBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
+
+      showToast('مرحباً بكم في دعوة زفاف أنس & بشرى 🤍✨');
+    }
+
+    function closeGate() {
+      isGateOpen = false;
+      cardGateOverlay.classList.remove('opened');
+      if (gateToggleBtn) {
+        gateToggleBtn.innerHTML = '<i class="fa-solid fa-envelope"></i>';
+        gateToggleBtn.title = "فتح بطاقة الدعوة";
+      }
+      showToast('تم غلق بطاقة الدعوة 📜');
+    }
+
+    function toggleGate() {
+      if (isGateOpen) {
+        closeGate();
+      } else {
+        openGate();
+      }
+    }
+
+    if (gateSealBtn) {
+      gateSealBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openGate();
+      });
+    }
+
+    if (cardGateOverlay) {
+      cardGateOverlay.addEventListener('click', () => {
+        openGate();
+      });
+    }
+
+    if (gateToggleBtn) {
+      gateToggleBtn.addEventListener('click', toggleGate);
+    }
   </script>
 </body>
 
