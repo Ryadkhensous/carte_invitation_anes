@@ -1,0 +1,19 @@
+{
+  "name": "carte-invitation-anis-yasmine",
+  "version": "1.0.0",
+  "description": "Carte d'invitation de mariage interactive et animée pour Anis & Yasmine",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx -y serve . -l 3000",
+    "dev": "npx -y serve . -l 3000"
+  },
+  "keywords": [
+    "wedding",
+    "invitation",
+    "arabic",
+    "animation",
+    "luxury"
+  ],
+  "author": "Antigravity",
+  "license": "MIT"
+}

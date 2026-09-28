@@ -1,0 +1,1734 @@
+<!DOCTYPE html>
+<html lang="fr" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>دعوة زفاف أنيس & ياسمين | Invitation de Mariage Anis & Yasmine</title>
+
+  <meta name="description"
+    content="يتشرف أنيس وياسمين بدعوتكم لمشاركتهما فرحة العمر في حفل زفافهما المبارك بقاعة الأفراح أوشن - سطيف">
+  <meta name="theme-color" content="#dcd9d0">
+
+  <!-- OpenGraph pour partage WhatsApp & Réseaux Sociaux -->
+  <meta property="og:title" content="دعوة زفاف أنيس & ياسمين 💍✨">
+  <meta property="og:description"
+    content="يسعدنا ويشرفنا حضوركم لمشاركتنا فرحة العمر بقاعة أوشن - سطيف الجمعة 05 فيفري 2027">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts de prestige -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:wght@400;700&family=Cinzel+Decorative:wght@700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Reem+Kufi:wght@500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- FontAwesome 6.5.1 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    /* ==========================================================================
+       VARIABLES & THÈME CARTE GAUFRÉE LUXE
+       ========================================================================== */
+    :root {
+      --bg-page: #dcd9d0;
+      --card-bg-light: #fbfaf8;
+      --card-bg-mid: #f1efe9;
+      --card-bg-dark: #e7e4dc;
+      --frame-bg: #f7f6f2;
+
+      --text-gold-dark: #8c6721;
+      --text-gold-primary: #a67c2e;
+      --text-main: #4a4036;
+      --text-muted: #7d7265;
+      --text-light: #9c9183;
+
+      --gold-metallic: linear-gradient(135deg, #a67c2e 0%, #d4af37 35%, #8f651b 70%, #dfb752 100%);
+      --gold-border: rgba(197, 160, 89, 0.45);
+      --emboss-shadow:
+        inset 3px 3px 6px rgba(195, 190, 180, 0.55),
+        inset -3px -3px 6px rgba(255, 255, 255, 0.95);
+
+      --font-arabic-title: 'Aref Ruqaa', serif;
+      --font-arabic-body: 'Amiri', serif;
+      --font-arabic-kufi: 'Reem Kufi', sans-serif;
+      --font-eng-serif: 'Cormorant Garamond', serif;
+      --font-eng-script: 'Great Vibes', cursive;
+      --font-eng-royal: 'Cinzel Decorative', serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-page);
+      background-image:
+        radial-gradient(circle at 15% 15%, rgba(255, 255, 255, 0.5) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(200, 195, 185, 0.3) 0%, transparent 50%),
+        linear-gradient(180deg, #dfdcd3 0%, #d4d0c7 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 24px 14px 60px 14px;
+      font-family: var(--font-arabic-body);
+      color: var(--text-main);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Canvas des particules (Poussière dorée & Pétales) */
+    #particlesCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 99;
+    }
+
+    /* Barre d'outils flottante supérieure */
+    .floating-toolbar {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      display: flex;
+      gap: 10px;
+      z-index: 100;
+    }
+
+    .tool-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(251, 250, 248, 0.92);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(205, 200, 190, 0.8);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1), inset 0 0 8px rgba(255, 255, 255, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-gold-dark);
+      cursor: pointer;
+      font-size: 17px;
+      transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .tool-btn:hover {
+      transform: translateY(-2px) scale(1.06);
+      box-shadow: 0 8px 20px rgba(166, 124, 46, 0.25);
+      border-color: var(--text-gold-primary);
+    }
+
+    .tool-btn.active {
+      background: var(--text-gold-dark);
+      color: #fff;
+      box-shadow: 0 0 14px rgba(166, 124, 46, 0.5);
+    }
+
+    .tool-btn.playing i {
+      animation: pulseMusic 1.8s infinite ease-in-out;
+    }
+
+    @keyframes pulseMusic {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.22);
+        color: #ffd778;
+      }
+    }
+
+    /* ==========================================================================
+       CONTENEUR PRINCIPAL DE LA CARTE AU FORMAT PORTRAIT (9:16)
+       ========================================================================== */
+    .invitation-card {
+      position: relative;
+      width: 100%;
+      max-width: 520px;
+      aspect-ratio: 9 / 16;
+      background: radial-gradient(circle at center, #fbfaf8 0%, #f1efe9 70%, #e7e4dc 100%);
+      border-radius: 6px;
+      box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.18),
+        0 4px 12px rgba(0, 0, 0, 0.08),
+        inset 0 0 40px rgba(255, 255, 255, 0.9);
+      overflow: hidden;
+      margin: 0 auto;
+      transition: transform 0.3s ease;
+    }
+
+    /* Bordure extérieure en dentelle gaufrée */
+    .outer-lace {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle at 12px 12px, transparent 8px, rgba(255, 255, 255, 0.85) 9px, rgba(205, 200, 190, 0.45) 11px, transparent 13px),
+        radial-gradient(circle at 36px 36px, transparent 10px, rgba(255, 255, 255, 0.9) 11px, rgba(205, 200, 190, 0.4) 13px, transparent 15px);
+      background-size: 48px 48px;
+      opacity: 0.95;
+      z-index: 1;
+    }
+
+    /* Cadre intérieur en relief avec coins arqués */
+    .inner-embossed-frame {
+      position: absolute;
+      top: 9%;
+      bottom: 9%;
+      left: 10%;
+      right: 10%;
+      border-radius: 90px / 110px;
+      background-color: #f7f6f2;
+      box-shadow:
+        /* Effet relief creusé/gaufré */
+        inset 3px 3px 6px rgba(195, 190, 180, 0.55),
+        inset -3px -3px 6px rgba(255, 255, 255, 0.95),
+        0 0 0 6px #f3f1ec,
+        0 0 0 8px rgba(205, 200, 190, 0.45),
+        0 0 0 15px #f7f5f0,
+        0 4px 14px rgba(180, 175, 165, 0.35);
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2;
+    }
+
+    /* Bordure perlée sur le pourtour du cadre */
+    .inner-embossed-frame::before {
+      content: "";
+      position: absolute;
+      inset: 8px;
+      border-radius: 82px / 102px;
+      border: 2px dashed rgba(210, 206, 196, 0.65);
+      box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.9);
+      pointer-events: none;
+      z-index: 4;
+    }
+
+    /* Motif arabesque/damassé central en relief blanc sur blanc */
+    .damask-pattern {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.85;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Éléments décoratifs (Fleurs et Colombes) */
+    .top-bouquet {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 54%;
+      z-index: 10;
+      pointer-events: none;
+      filter: drop-shadow(0 4px 8px rgba(140, 135, 125, 0.28));
+    }
+
+    .dove {
+      position: absolute;
+      top: 4.5%;
+      width: 26%;
+      z-index: 9;
+      pointer-events: none;
+      filter: drop-shadow(0 4px 6px rgba(160, 155, 145, 0.25));
+    }
+
+    .dove-left {
+      left: 2%;
+    }
+
+    .dove-right {
+      right: 2%;
+      transform: scaleX(-1);
+    }
+
+    .bottom-left-flowers {
+      position: absolute;
+      bottom: -15px;
+      left: -15px;
+      width: 72%;
+      z-index: 10;
+      pointer-events: none;
+      filter: drop-shadow(2px -2px 10px rgba(130, 125, 115, 0.3));
+    }
+
+    /* ==========================================================================
+       CONTENU DE L'INVITATION AU CENTRE DU CADRE
+       ========================================================================== */
+    .card-content {
+      position: relative;
+      z-index: 5;
+      text-align: center;
+      width: 100%;
+      height: 100%;
+      padding: clamp(65px, 9vw, 95px) clamp(16px, 4vw, 28px) clamp(40px, 6vw, 60px) clamp(16px, 4vw, 28px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--text-main);
+      box-sizing: border-box;
+    }
+
+    /* Bismillah et verset */
+    .card-header-verse {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .bismillah {
+      font-family: var(--font-arabic-title);
+      font-size: clamp(16px, 3.2vw, 21px);
+      font-weight: 700;
+      color: var(--text-gold-dark);
+      text-shadow: 0 1px 1px rgba(255, 255, 255, 0.95);
+      letter-spacing: 0.5px;
+    }
+
+    .quran-quote {
+      font-family: var(--font-arabic-body);
+      font-size: clamp(11px, 2.2vw, 13.5px);
+      line-height: 1.6;
+      color: var(--text-muted);
+      max-width: 90%;
+      margin: 2px auto 0;
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.85);
+    }
+
+    .badge-invitation {
+      display: inline-block;
+      font-family: var(--font-arabic-kufi);
+      font-size: clamp(10px, 2vw, 12px);
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--text-gold-primary);
+      background: rgba(255, 255, 255, 0.65);
+      border: 1px solid rgba(201, 158, 75, 0.35);
+      padding: 3px 14px;
+      border-radius: 20px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+      margin-top: 4px;
+    }
+
+    /* Section des noms des Mariés */
+    .couple-hero {
+      margin: 6px 0;
+      text-align: center;
+    }
+
+    .couple-names-ar {
+      font-family: var(--font-arabic-title);
+      font-size: clamp(34px, 7vw, 48px);
+      font-weight: 700;
+      line-height: 1.25;
+      background: var(--gold-metallic);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 2px 4px rgba(166, 124, 46, 0.22));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .gold-ring-icon {
+      font-size: clamp(20px, 4vw, 26px);
+      -webkit-text-fill-color: initial;
+      display: inline-block;
+      animation: softTwinkle 2.5s infinite ease-in-out;
+    }
+
+    @keyframes softTwinkle {
+
+      0%,
+      100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 0.9;
+      }
+
+      50% {
+        transform: scale(1.15) rotate(5deg);
+        opacity: 1;
+      }
+    }
+
+    .couple-names-fr {
+      font-family: var(--font-eng-script);
+      font-size: clamp(26px, 5.5vw, 36px);
+      color: var(--text-gold-dark);
+      margin-top: -2px;
+      text-shadow: 0 1px 1px rgba(255, 255, 255, 0.85);
+      direction: ltr;
+    }
+
+    .invite-text {
+      font-family: var(--font-arabic-body);
+      font-size: clamp(12px, 2.4vw, 14.5px);
+      color: var(--text-main);
+      line-height: 1.55;
+      max-width: 90%;
+      margin: 0 auto;
+    }
+
+    /* Badges Date / Heure / Lieu au centre */
+    .card-info-pills {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      width: 100%;
+      max-width: 290px;
+      margin: 4px auto;
+    }
+
+    .info-pill {
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid rgba(210, 206, 196, 0.8);
+      border-radius: 24px;
+      padding: 6px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: clamp(11.5px, 2.2vw, 13.5px);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03), inset 0 0 6px rgba(255, 255, 255, 0.85);
+      color: var(--text-main);
+      font-family: var(--font-arabic-kufi);
+    }
+
+    .info-pill i {
+      color: var(--text-gold-dark);
+      font-size: 13px;
+    }
+
+    .info-pill.venue-pill {
+      background: rgba(253, 251, 247, 0.9);
+      border-color: rgba(201, 158, 75, 0.5);
+      font-weight: 700;
+      color: var(--text-gold-dark);
+    }
+
+    /* Actions intégrées à la carte */
+    .card-actions-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+      max-width: 290px;
+      z-index: 15;
+    }
+
+    .btn-embossed {
+      background: linear-gradient(180deg, #fefefe 0%, #f4f0e6 100%);
+      border: 1px solid rgba(197, 160, 89, 0.6);
+      border-radius: 28px;
+      padding: 9px 18px;
+      font-family: var(--font-arabic-kufi);
+      font-size: clamp(12px, 2.3vw, 13.5px);
+      font-weight: 700;
+      color: var(--text-gold-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06), inset 0 1px 0 #fff;
+      transition: all 0.25s ease;
+    }
+
+    .btn-embossed:hover {
+      background: linear-gradient(180deg, #fff 0%, #ede6d6 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(166, 124, 46, 0.2);
+      border-color: var(--text-gold-primary);
+    }
+
+    .btn-embossed.btn-gold-primary {
+      background: linear-gradient(135deg, #d3aa54 0%, #fae9c3 30%, #b88628 75%, #fff3d6 100%);
+      color: #2b1f14;
+      border: none;
+      box-shadow: 0 4px 14px rgba(184, 134, 40, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    }
+
+    .btn-embossed.btn-gold-primary:hover {
+      background: linear-gradient(135deg, #fae9c3 0%, #ffd778 40%, #b88628 85%, #fff6e0 100%);
+      box-shadow: 0 6px 20px rgba(184, 134, 40, 0.45);
+    }
+
+    .details-scroll-btn {
+      font-family: var(--font-arabic-kufi);
+      font-size: 11.5px;
+      color: var(--text-muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      margin-top: 2px;
+      transition: color 0.2s ease;
+    }
+
+    .details-scroll-btn:hover {
+      color: var(--text-gold-dark);
+    }
+
+    .details-scroll-btn i {
+      animation: bounceDown 1.8s infinite;
+    }
+
+    @keyframes bounceDown {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(3px);
+      }
+    }
+
+    /* ==========================================================================
+       SECTIONS COMPLÉMENTAIRES ÉLÉGANTES (AU BAS DE LA CARTE)
+       ========================================================================== */
+    .supplementary-sections {
+      width: 100%;
+      max-width: 520px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      margin-top: 28px;
+    }
+
+    .embossed-panel {
+      position: relative;
+      background: radial-gradient(circle at center, #fbfaf8 0%, #f4f2ec 100%);
+      border-radius: 20px;
+      border: 1px solid rgba(210, 206, 196, 0.7);
+      box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.08),
+        inset 0 0 25px rgba(255, 255, 255, 0.9);
+      padding: 24px 20px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .embossed-panel::before {
+      content: "";
+      position: absolute;
+      inset: 6px;
+      border-radius: 15px;
+      border: 1.5px dashed rgba(215, 210, 200, 0.6);
+      pointer-events: none;
+    }
+
+    .panel-title {
+      font-family: var(--font-arabic-title);
+      font-size: 24px;
+      color: var(--text-gold-dark);
+      margin-bottom: 14px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .panel-title::after {
+      content: "⚜";
+      display: block;
+      font-size: 13px;
+      color: var(--text-gold-primary);
+      margin-top: -2px;
+      opacity: 0.7;
+    }
+
+    /* Compte à rebours */
+    .countdown-timer-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin: 16px 0;
+      direction: ltr;
+    }
+
+    .time-tile {
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(201, 158, 75, 0.35);
+      border-radius: 12px;
+      padding: 10px 6px;
+      min-width: 66px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04), inset 0 0 6px rgba(255, 255, 255, 0.9);
+      transition: transform 0.2s ease;
+    }
+
+    .time-tile:hover {
+      transform: translateY(-2px);
+      border-color: var(--text-gold-primary);
+    }
+
+    .time-num {
+      font-family: var(--font-eng-serif);
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1;
+      background: var(--gold-metallic);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .time-lbl {
+      font-size: 10px;
+      letter-spacing: 1px;
+      margin-top: 4px;
+      color: var(--text-muted);
+      font-family: var(--font-eng-serif);
+      font-weight: 600;
+    }
+
+    .time-lbl.ar {
+      font-family: var(--font-arabic-kufi);
+      font-size: 11px;
+      margin-top: 2px;
+    }
+
+    .time-separator {
+      font-size: 24px;
+      color: var(--text-gold-dark);
+      font-weight: bold;
+      margin-top: -12px;
+    }
+
+    /* Timeline du Mariage */
+    .wedding-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 10px;
+      text-align: right;
+    }
+
+    .timeline-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.6);
+      border: 1px solid rgba(215, 210, 200, 0.6);
+      padding: 10px 14px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+    }
+
+    .timeline-hour {
+      font-family: var(--font-eng-serif);
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--text-gold-dark);
+      min-width: 55px;
+      direction: ltr;
+      text-align: center;
+    }
+
+    .timeline-text {
+      flex: 1;
+    }
+
+    .timeline-title-ar {
+      font-family: var(--font-arabic-kufi);
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .timeline-sub-fr {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      font-family: var(--font-eng-serif);
+    }
+
+    /* Salle et Localisation */
+    .venue-showcase {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .venue-img-wrapper {
+      width: 100%;
+      height: 180px;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(201, 158, 75, 0.4);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+
+    .venue-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .venue-img-wrapper:hover .venue-img {
+      transform: scale(1.05);
+    }
+
+    .venue-name-title {
+      font-family: var(--font-arabic-title);
+      font-size: 22px;
+      color: var(--text-gold-dark);
+      font-weight: 700;
+    }
+
+    .delicatesse-box {
+      background: rgba(255, 255, 255, 0.55);
+      border-radius: 12px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+      font-size: 12.5px;
+      color: var(--text-muted);
+      text-align: right;
+    }
+
+    .delicatesse-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .delicatesse-row i {
+      color: var(--text-gold-dark);
+      font-size: 14px;
+    }
+
+    /* Livre d'or et vœux */
+    .wishes-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .wish-input-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .wish-input {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(201, 158, 75, 0.4);
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-family: var(--font-arabic-body);
+      font-size: 14px;
+      color: var(--text-main);
+      outline: none;
+      text-align: right;
+      transition: border-color 0.2s ease;
+    }
+
+    .wish-input:focus {
+      border-color: var(--text-gold-dark);
+      box-shadow: 0 0 8px rgba(166, 124, 46, 0.2);
+    }
+
+    .wishes-feed {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 190px;
+      overflow-y: auto;
+      padding-right: 4px;
+      text-align: right;
+    }
+
+    .wish-bubble {
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid rgba(215, 210, 200, 0.6);
+      border-radius: 12px;
+      padding: 8px 12px;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-main);
+      animation: fadeIn 0.4s ease;
+    }
+
+    .wish-bubble i {
+      color: #c99e4b;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-5px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Footer de bénédiction */
+    .footer-blessing {
+      text-align: center;
+      margin-top: 24px;
+      font-family: var(--font-arabic-title);
+      font-size: 19px;
+      color: var(--text-gold-dark);
+      text-shadow: 0 1px 1px rgba(255, 255, 255, 0.9);
+    }
+
+
+
+    /* Notification Toast */
+    .toast-msg {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: rgba(43, 35, 28, 0.95);
+      backdrop-filter: blur(8px);
+      color: #f7e7be;
+      border: 1px solid rgba(201, 158, 75, 0.6);
+      border-radius: 30px;
+      padding: 10px 22px;
+      font-family: var(--font-arabic-kufi);
+      font-size: 13.5px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 300;
+      opacity: 0;
+      transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+      pointer-events: none;
+    }
+
+    .toast-msg.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* Responsive Ajustements */
+    @media (max-width: 480px) {
+      body {
+        padding: 12px 8px 50px 8px;
+      }
+
+      .floating-toolbar {
+        top: 10px;
+        right: 10px;
+      }
+
+      .tool-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ==========================================================================
+       CANVAS DES PARTICULES (ÉTOILES DORÉES & PÉTALES FLOTTANTS)
+       ========================================================================== -->
+  <canvas id="particlesCanvas"></canvas>
+
+  <!-- ==========================================================================
+       BARRE D'OUTILS FLOTTANTE (MUSIQUE, PÉTALES, PARTAGE)
+       ========================================================================== -->
+  <div class="floating-toolbar">
+    <button class="tool-btn" id="musicToggleBtn" title="تشغيل / إيقاف الموسيقى">
+      <i class="fa-solid fa-music"></i>
+    </button>
+    <button class="tool-btn active" id="petalToggleBtn" title="تساقط الورد والبريق">
+      <i class="fa-solid fa-wand-magic-sparkles"></i>
+    </button>
+    <a href="https://api.whatsapp.com/send?text=يسعدني+دعوتكم+لمشاهدة+بطاقة+دعوة+زفاف+أنيس+و+ياسمين+💍✨" target="_blank"
+      class="tool-btn" title="مشاركة عبر واتساب">
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
+  </div>
+
+  <!-- ==========================================================================
+       CARTE FLORALE GAUFRÉE PRINCIPALE (9:16)
+       ========================================================================== -->
+  <div class="invitation-card" id="invitationCard">
+    <!-- Définitions SVG réutilisables (Roses, Feuillages, Colombes, Arabesques) -->
+    <svg width="0" height="0" style="position:absolute; left:-9999px; top:-9999px; pointer-events:none;"
+      aria-hidden="true">
+      <defs>
+        <!-- Filtre d'effet gaufré (emboss) -->
+        <filter id="emboss" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="1.5" dy="1.5" stdDeviation="1" flood-color="#ffffff" flood-opacity="0.95" />
+          <feDropShadow dx="-1.2" dy="-1.2" stdDeviation="1" flood-color="#cbc6bc" flood-opacity="0.55" />
+        </filter>
+
+        <!-- Dégradés pour les roses blanches -->
+        <radialGradient id="petalGrad" cx="50%" cy="50%" r="55%">
+          <stop offset="0%" stop-color="#e8e2d5" />
+          <stop offset="45%" stop-color="#f7f5f0" />
+          <stop offset="85%" stop-color="#ffffff" />
+          <stop offset="100%" stop-color="#dcd6c8" />
+        </radialGradient>
+
+        <radialGradient id="roseCenter" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#cbbd9f" />
+          <stop offset="60%" stop-color="#e9e3d4" />
+          <stop offset="100%" stop-color="#fbfaf7" />
+        </radialGradient>
+
+        <linearGradient id="leafDark" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#4e5e44" />
+          <stop offset="50%" stop-color="#384730" />
+          <stop offset="100%" stop-color="#24301e" />
+        </linearGradient>
+
+        <linearGradient id="leafSage" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#8fa07e" />
+          <stop offset="60%" stop-color="#667758" />
+          <stop offset="100%" stop-color="#46563b" />
+        </linearGradient>
+
+        <!-- Symbole d'une feuille détaillée -->
+        <g id="leaf">
+          <path d="M 0,0 C 15,-18 42,-18 58,0 C 42,18 15,18 0,0 Z" fill="url(#leafDark)" />
+          <path d="M 2,0 Q 28,-2 55,0" stroke="#7c8f6c" stroke-width="1" fill="none" opacity="0.7" />
+          <path d="M 18,-1 L 26,-7 M 28,-1 L 36,-7 M 38,-1 L 45,-5 M 18,1 L 26,7 M 28,1 L 36,7" stroke="#7c8f6c"
+            stroke-width="0.7" fill="none" opacity="0.5" />
+        </g>
+
+        <g id="leaf-light">
+          <path d="M 0,0 C 12,-14 34,-14 46,0 C 34,14 12,14 0,0 Z" fill="url(#leafSage)" />
+          <path d="M 2,0 L 43,0" stroke="#b6c4a6" stroke-width="0.8" fill="none" />
+        </g>
+
+        <!-- Symbole d'une Rose Blanche Épanouie -->
+        <g id="white-rose">
+          <!-- Pétales extérieurs -->
+          <path d="M -38,-12 C -52,-38 -15,-56 5,-44 C 28,-56 54,-32 42,-6 C 58,18 35,48 8,42 C -15,55 -48,35 -40,8 Z"
+            fill="url(#petalGrad)" stroke="#d8d2c5" stroke-width="0.6" />
+          <path d="M -30,-25 C -10,-48 25,-45 35,-20 C 48,5 30,36 0,38 C -28,38 -46,10 -30,-25 Z" fill="url(#petalGrad)"
+            stroke="#ded8cc" stroke-width="0.6" transform="rotate(25)" />
+          <!-- Pétales intermédiaires -->
+          <path d="M -26,-10 C -32,-30 -5,-38 12,-28 C 32,-25 36,5 20,20 C 5,34 -24,28 -26,5 Z" fill="url(#petalGrad)"
+            stroke="#d5cfc2" stroke-width="0.7" />
+          <path d="M -18,15 C -30,-5 -18,-26 4,-24 C 24,-22 28,4 14,18 C -2,28 -14,22 -18,15 Z" fill="url(#petalGrad)"
+            stroke="#d9d3c6" stroke-width="0.7" transform="rotate(-35)" />
+          <!-- Cœur de la rose -->
+          <circle cx="0" cy="0" r="15" fill="url(#roseCenter)" />
+          <path d="M -12,-4 C -8,-14 8,-14 12,-3 C 14,8 2,14 -8,9 C -15,4 -10,-8 -2,-8 C 6,-8 8,2 2,5 C -3,7 -6,2 -3,-2"
+            fill="none" stroke="#b8ab90" stroke-width="1.4" stroke-linecap="round" />
+        </g>
+
+        <!-- Petit bouton floral blanc -->
+        <g id="flower-bud">
+          <path d="M 0,0 C -6,-8 -4,-18 0,-22 C 4,-18 6,-8 0,0 Z" fill="#f7f5f0" stroke="#ccc5b6" stroke-width="0.6" />
+          <path d="M -5,-4 C -8,-12 -2,-18 0,-18 C -2,-10 -1,-4 -5,-4 Z" fill="#e5dfd0" />
+          <path d="M -6,2 Q 0,-5 6,2" stroke="#4e5e44" stroke-width="2" fill="none" />
+        </g>
+
+        <!-- Motif Arabesque pour le fond gaufré -->
+        <pattern id="arabesqueTile" width="120" height="120" patternUnits="userSpaceOnUse">
+          <g fill="none" stroke="#ebe8e0" stroke-width="2.4" stroke-linecap="round" filter="url(#emboss)">
+            <!-- Volutes symétriques style damassé -->
+            <path d="M 60,10 C 85,10 95,35 75,50 C 60,60 45,45 55,32 C 62,24 72,30 68,38" />
+            <path d="M 60,10 C 35,10 25,35 45,50 C 60,60 75,45 65,32 C 58,24 48,30 52,38" />
+            <path d="M 60,110 C 85,110 95,85 75,70 C 60,60 45,75 55,88 C 62,96 72,90 68,82" />
+            <path d="M 60,110 C 35,110 25,85 45,70 C 60,60 75,75 65,88 C 58,96 48,90 52,82" />
+            <path d="M 10,60 C 10,35 35,25 50,45 M 10,60 C 10,85 35,95 50,75" />
+            <path d="M 110,60 C 110,35 85,25 70,45 M 110,60 C 110,85 85,95 70,75" />
+            <circle cx="60" cy="60" r="5" />
+            <circle cx="0" cy="0" r="8" />
+            <circle cx="120" cy="0" r="8" />
+            <circle cx="0" cy="120" r="8" />
+            <circle cx="120" cy="120" r="8" />
+          </g>
+        </pattern>
+
+        <!-- Motif Dentelle extérieure -->
+        <pattern id="outerLacePattern" width="80" height="80" patternUnits="userSpaceOnUse">
+          <g fill="none" stroke="#ece9e2" stroke-width="2.2" filter="url(#emboss)">
+            <path d="M 0,40 C 20,10 60,10 80,40 C 60,70 20,70 0,40 Z" />
+            <path d="M 40,0 C 10,20 10,60 40,80 C 70,60 70,20 40,0 Z" />
+            <circle cx="40" cy="40" r="12" />
+            <circle cx="40" cy="40" r="4" />
+          </g>
+        </pattern>
+      </defs>
+    </svg>
+
+    <!-- Fond de dentelle sur toute la carte -->
+    <svg class="outer-lace" width="100%" height="100%">
+      <rect width="100%" height="100%" fill="url(#outerLacePattern)" />
+    </svg>
+
+    <!-- Cadre central gaufré -->
+    <div class="inner-embossed-frame">
+      <svg class="damask-pattern" width="100%" height="100%">
+        <rect width="100%" height="100%" fill="url(#arabesqueTile)" />
+      </svg>
+
+      <!-- ================================================================
+           CONTENU PRINCIPAL DE L'INVITATION
+           ================================================================ -->
+      <div class="card-content">
+
+        <!-- En-tête : Bismillah & Verset coranique -->
+        <div class="card-header-verse">
+          <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+          <p class="quran-quote">
+            ﴿ وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم
+            مَّوَدَّةً وَرَحْمَةً ﴾
+          </p>
+          <div class="badge-invitation">دَعْـوَةُ زَفَـافٍ</div>
+        </div>
+
+        <!-- Section centrale : Noms des Mariés -->
+        <div class="couple-hero">
+          <h1 class="couple-names-ar">
+            <span>أنيس</span>
+            <span class="gold-ring-icon">💍</span>
+            <span>ياسمين</span>
+          </h1>
+          <div class="couple-names-fr">Anis &amp; Yasmine</div>
+        </div>
+
+        <!-- Phrase d'invitation chaleureuse -->
+        <p class="invite-text">
+          بكل مشاعر المحبة والسرور، ندعوكم لمشاركتنا فرحة العمر في حفل زفافنا الميمون، لتكتمل سعادتنا بجميل حضوركم وصادق
+          دعواتكم.
+        </p>
+
+        <!-- Informations essentielles (Date, Heure, Salle) -->
+        <div class="card-info-pills">
+          <div class="info-pill">
+            <i class="fa-regular fa-calendar-days"></i>
+            <span>الجمعة 05 فيفري 2027</span>
+          </div>
+          <div class="info-pill">
+            <i class="fa-regular fa-clock"></i>
+            <span>ابتداءً من الساعة 18:00 مساءً</span>
+          </div>
+          <div class="info-pill venue-pill">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>قاعة الحفلات أوشن - سطيف</span>
+          </div>
+        </div>
+
+        <!-- Boutons d'action directs sur la carte -->
+        <div class="card-actions-wrapper">
+          <a href="https://www.google.com/maps/search/?api=1&query=قاعة+الأفراح+اوشن+سطيف" target="_blank"
+            rel="noopener noreferrer" class="btn-embossed btn-gold-primary">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>موقع القاعة (Google Maps)</span>
+          </a>
+
+          <button class="btn-embossed" id="addToCalBtnCard">
+            <i class="fa-regular fa-calendar-plus"></i>
+            <span>حفظ الموعد في التقويم</span>
+          </button>
+
+          <a href="#detailsSection" class="details-scroll-btn">
+            <span>عرض البرنامج وباقي التفاصيل</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Bouquet de roses en haut au centre -->
+    <svg class="top-bouquet" viewBox="0 0 320 170">
+      <!-- Feuillages arrière-plan -->
+      <use href="#leaf" transform="translate(150,75) rotate(-145) scale(1.3)" />
+      <use href="#leaf" transform="translate(170,75) rotate(-35) scale(1.3)" />
+      <use href="#leaf" transform="translate(110,95) rotate(-165) scale(1.2)" />
+      <use href="#leaf" transform="translate(210,95) rotate(-15) scale(1.2)" />
+      <use href="#leaf-light" transform="translate(95,115) rotate(155) scale(1.2)" />
+      <use href="#leaf-light" transform="translate(225,115) rotate(25) scale(1.2)" />
+      <use href="#leaf" transform="translate(155,115) rotate(115) scale(1.1)" />
+      <use href="#leaf" transform="translate(165,115) rotate(65) scale(1.1)" />
+      <use href="#leaf-light" transform="translate(130,65) rotate(-110) scale(1)" />
+      <use href="#leaf-light" transform="translate(190,65) rotate(-70) scale(1)" />
+
+      <!-- Petits boutons floraux -->
+      <use href="#flower-bud" transform="translate(75,85) rotate(-65) scale(1.1)" />
+      <use href="#flower-bud" transform="translate(245,85) rotate(65) scale(1.1)" />
+      <use href="#flower-bud" transform="translate(160,35) scale(1)" />
+      <use href="#flower-bud" transform="translate(125,135) rotate(-150) scale(0.9)" />
+      <use href="#flower-bud" transform="translate(195,135) rotate(150) scale(0.9)" />
+
+      <!-- Deux grandes roses blanches principales -->
+      <use href="#white-rose" transform="translate(122,88) rotate(-15) scale(1.05)" />
+      <use href="#white-rose" transform="translate(198,85) rotate(20) scale(1)" />
+    </svg>
+
+    <!-- Colombe en haut à gauche -->
+    <svg class="dove dove-left" viewBox="0 0 180 180">
+      <!-- Rameau d'olivier dans le bec -->
+      <g transform="translate(132,75) rotate(15)">
+        <path d="M -25,15 Q 0,0 22,-18" stroke="#5c6b50" stroke-width="1.8" fill="none" />
+        <use href="#leaf-light" transform="translate(-10,5) rotate(-45) scale(0.35)" />
+        <use href="#leaf-light" transform="translate(5,-6) rotate(-15) scale(0.35)" />
+        <use href="#leaf-light" transform="translate(10,-12) rotate(-80) scale(0.3)" />
+        <use href="#leaf" transform="translate(-5,8) rotate(25) scale(0.3)" />
+      </g>
+      <!-- Aile arrière -->
+      <path d="M 85,78 C 80,45 95,18 115,8 C 122,32 115,60 100,82 Z" fill="#ebe7df" stroke="#d5cfc4"
+        stroke-width="0.8" />
+      <!-- Aile principale déployée -->
+      <path
+        d="M 72,85 C 45,55 18,35 8,15 C 8,35 18,52 28,60 C 15,55 10,48 6,42 C 12,58 24,70 38,76 C 22,75 15,70 10,65 C 18,78 35,88 58,94 Z"
+        fill="#fcfbf9" stroke="#dcd6cb" stroke-width="0.8" />
+      <!-- Queue -->
+      <path d="M 55,108 C 35,122 22,138 18,152 C 32,150 48,148 62,140 C 65,126 65,115 55,108 Z" fill="#f3EFE8"
+        stroke="#d8d1c5" stroke-width="0.8" />
+      <path d="M 22,148 C 35,146 48,143 58,136" stroke="#cbbba6" stroke-width="2.5" fill="none" opacity="0.6" />
+      <!-- Corps et tête de la colombe -->
+      <path
+        d="M 52,108 C 68,118 95,112 112,92 C 120,82 124,72 132,68 C 126,62 118,62 112,67 C 105,73 95,82 72,85 C 60,90 52,100 52,108 Z"
+        fill="#ffffff" stroke="#dcd6cb" stroke-width="0.8" />
+      <!-- Bec et œil -->
+      <polygon points="131,67 140,70 131,72" fill="#c9b29b" />
+      <circle cx="122" cy="68" r="1.8" fill="#3d3834" />
+    </svg>
+
+    <!-- Colombe en haut à droite (miroir via CSS) -->
+    <svg class="dove dove-right" viewBox="0 0 180 180">
+      <g transform="translate(132,75) rotate(15)">
+        <path d="M -25,15 Q 0,0 22,-18" stroke="#5c6b50" stroke-width="1.8" fill="none" />
+        <use href="#leaf-light" transform="translate(-10,5) rotate(-45) scale(0.35)" />
+        <use href="#leaf-light" transform="translate(5,-6) rotate(-15) scale(0.35)" />
+        <use href="#leaf-light" transform="translate(10,-12) rotate(-80) scale(0.3)" />
+        <use href="#leaf" transform="translate(-5,8) rotate(25) scale(0.3)" />
+      </g>
+      <path d="M 85,78 C 80,45 95,18 115,8 C 122,32 115,60 100,82 Z" fill="#ebe7df" stroke="#d5cfc4"
+        stroke-width="0.8" />
+      <path
+        d="M 72,85 C 45,55 18,35 8,15 C 8,35 18,52 28,60 C 15,55 10,48 6,42 C 12,58 24,70 38,76 C 22,75 15,70 10,65 C 18,78 35,88 58,94 Z"
+        fill="#fcfbf9" stroke="#dcd6cb" stroke-width="0.8" />
+      <path d="M 55,108 C 35,122 22,138 18,152 C 32,150 48,148 62,140 C 65,126 65,115 55,108 Z" fill="#f3EFE8"
+        stroke="#d8d1c5" stroke-width="0.8" />
+      <path d="M 22,148 C 35,146 48,143 58,136" stroke="#cbbba6" stroke-width="2.5" fill="none" opacity="0.6" />
+      <path
+        d="M 52,108 C 68,118 95,112 112,92 C 120,82 124,72 132,68 C 126,62 118,62 112,67 C 105,73 95,82 72,85 C 60,90 52,100 52,108 Z"
+        fill="#ffffff" stroke="#dcd6cb" stroke-width="0.8" />
+      <polygon points="131,67 140,70 131,72" fill="#c9b29b" />
+      <circle cx="122" cy="68" r="1.8" fill="#3d3834" />
+    </svg>
+
+    <!-- Composition florale en bas à gauche (forme en L avec 4 roses) -->
+    <svg class="bottom-left-flowers" viewBox="0 0 360 360">
+      <!-- Feuillages branche verticale gauche -->
+      <use href="#leaf" transform="translate(35,130) rotate(-75) scale(1.3)" />
+      <use href="#leaf-light" transform="translate(65,145) rotate(-40) scale(1.2)" />
+      <use href="#leaf" transform="translate(80,195) rotate(-15) scale(1.3)" />
+      <use href="#leaf" transform="translate(25,210) rotate(-110) scale(1.2)" />
+      <use href="#leaf-light" transform="translate(85,255) rotate(10) scale(1.2)" />
+
+      <!-- Feuillages branche horizontale basse -->
+      <use href="#leaf" transform="translate(145,310) rotate(-35) scale(1.3)" />
+      <use href="#leaf" transform="translate(215,300) rotate(-55) scale(1.2)" />
+      <use href="#leaf" transform="translate(275,320) rotate(-15) scale(1.35)" />
+      <use href="#leaf-light" transform="translate(265,345) rotate(15) scale(1.2)" />
+      <use href="#leaf" transform="translate(180,350) rotate(25) scale(1.3)" />
+      <use href="#leaf-light" transform="translate(115,285) rotate(-65) scale(1.1)" />
+
+      <!-- Boutons de fleurs -->
+      <use href="#flower-bud" transform="translate(65,95) rotate(20) scale(1.2)" />
+      <use href="#flower-bud" transform="translate(115,175) rotate(55) scale(1.1)" />
+      <use href="#flower-bud" transform="translate(165,265) rotate(15) scale(1.1)" />
+      <use href="#flower-bud" transform="translate(315,315) rotate(75) scale(1.1)" />
+
+      <!-- Les 4 grandes roses blanches du coin inférieur gauche -->
+      <use href="#white-rose" transform="translate(52,190) rotate(10) scale(1.15)" />
+      <use href="#white-rose" transform="translate(65,285) rotate(-25) scale(1.18)" />
+      <use href="#white-rose" transform="translate(168,325) rotate(15) scale(1.05)" />
+      <use href="#white-rose" transform="translate(245,320) rotate(-10) scale(1.05)" />
+    </svg>
+  </div>
+
+  <!-- ==========================================================================
+       SECTIONS COMPLÉMENTAIRES (COMPTE À REBOURS, PROGRAMME, LIEU, RSVP)
+       ========================================================================== -->
+  <div class="supplementary-sections" id="detailsSection">
+
+    <!-- 1. COMPTE À REBOURS FESTIF -->
+    <div class="embossed-panel">
+      <h2 class="panel-title">العد التنازلي للزفاف</h2>
+      <p style="font-size: 13.5px; color: var(--text-muted); font-family: var(--font-arabic-kufi);">
+        بانتظار لقياكم في أجمل ليالي العمر
+      </p>
+
+      <div class="countdown-timer-wrap">
+        <div class="time-tile">
+          <span class="time-num" id="days">00</span>
+          <span class="time-lbl">DAYS</span>
+          <span class="time-lbl ar">يوم</span>
+        </div>
+        <span class="time-separator">:</span>
+        <div class="time-tile">
+          <span class="time-num" id="hours">00</span>
+          <span class="time-lbl">HOURS</span>
+          <span class="time-lbl ar">ساعة</span>
+        </div>
+        <span class="time-separator">:</span>
+        <div class="time-tile">
+          <span class="time-num" id="minutes">00</span>
+          <span class="time-lbl">MINS</span>
+          <span class="time-lbl ar">دقيقة</span>
+        </div>
+        <span class="time-separator">:</span>
+        <div class="time-tile">
+          <span class="time-num" id="seconds">00</span>
+          <span class="time-lbl">SECS</span>
+          <span class="time-lbl ar">ثانية</span>
+        </div>
+      </div>
+
+      <button class="btn-embossed" id="addToCalBtn" style="margin: 8px auto 0;">
+        <i class="fa-regular fa-calendar-plus"></i>
+        <span>حفظ الموعد في التقويم (Google / Apple)</span>
+      </button>
+    </div>
+
+    <!-- 2. PROGRAMME DU MARIAGE (TIMELINE) -->
+    <div class="embossed-panel">
+      <h2 class="panel-title">برنامج الحفل</h2>
+
+      <div class="wedding-timeline">
+        <div class="timeline-row">
+          <div class="timeline-hour">18:00</div>
+          <div class="timeline-text">
+            <div class="timeline-title-ar">استقبال والترحيب بالضيوف الكرام</div>
+            <div class="timeline-sub-fr">Accueil chaleureux des invités</div>
+          </div>
+        </div>
+
+        <div class="timeline-row">
+          <div class="timeline-hour">19:30</div>
+          <div class="timeline-text">
+            <div class="timeline-title-ar">الزفة والدخول الملكي للعروسين</div>
+            <div class="timeline-sub-fr">Entrée solennelle des mariés</div>
+          </div>
+        </div>
+
+        <div class="timeline-row">
+          <div class="timeline-hour">20:30</div>
+          <div class="timeline-text">
+            <div class="timeline-title-ar">مأدبة العشاء الفاخرة</div>
+            <div class="timeline-sub-fr">Dîner de réception gastronomique</div>
+          </div>
+        </div>
+
+        <div class="timeline-row">
+          <div class="timeline-hour">22:00</div>
+          <div class="timeline-text">
+            <div class="timeline-title-ar">تقطيع الكعكة وأخذ الصور التذكارية</div>
+            <div class="timeline-sub-fr">Pièce montée &amp; Séance photos</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. LIEU DE RÉCEPTION & SALLE OCEAN -->
+    <div class="embossed-panel">
+      <h2 class="panel-title">قاعة الحفلات أوشن</h2>
+
+      <div class="venue-showcase">
+        <div class="venue-img-wrapper">
+          <img src="assets/banquet.jpg"
+            onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=600&q=80'"
+            alt="قاعة أوشن سطيف" class="venue-img">
+        </div>
+
+        <div class="venue-name-title">Salle des Fêtes Ocean - Sétif</div>
+        <p style="font-size: 13.5px; color: var(--text-muted); font-family: var(--font-arabic-kufi); margin-top: -6px;">
+          سطيف، الجزائر • طريق ميسر ومواقف سيارات واسعة ومريحة
+        </p>
+
+        <a href="https://www.google.com/maps/search/?api=1&query=قاعة+الأفراح+اوشن+سطيف" target="_blank"
+          rel="noopener noreferrer" class="btn-embossed btn-gold-primary" style="width: 100%;">
+          <i class="fa-solid fa-location-crosshairs"></i>
+          <span>فتح الموقع عبر خرائط جوجل (Google Maps)</span>
+        </a>
+
+        <div class="delicatesse-box">
+          <div class="delicatesse-row">
+            <i class="fa-solid fa-camera-slash"></i>
+            <span>نرجو عدم التصوير احتراماً لخصوصية الحفل ولراحة العائلات</span>
+          </div>
+          <div class="delicatesse-row">
+            <i class="fa-solid fa-child-reaching"></i>
+            <span>جنة الأطفال منازلهم - نتمنى لكم سهرة ممتعة وهادئة</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. LIVRE D'OR ET TEHANI -->
+    <div class="embossed-panel">
+      <h2 class="panel-title">تهاني الضيوف ودعواتهم</h2>
+
+      <p
+        style="font-size: 13.5px; color: var(--text-muted); font-family: var(--font-arabic-kufi); margin-bottom: 14px;">
+        شاركونا فرحتنا بكلمة طيبة أو دعاء بالبركة للعروسين 🤍
+      </p>
+
+      <!-- Livre d'Or / تهاني مباشرة -->
+      <div class="wishes-wrapper">
+        <div class="wish-input-row">
+          <input type="text" id="guestWishInput" class="wish-input" placeholder="اكتب تهنئة للعروسين بالبركة...">
+          <button class="btn-embossed" id="sendWishBtn" style="padding: 10px 16px; border-radius: 12px;">
+            <i class="fa-solid fa-paper-plane"></i>
+          </button>
+        </div>
+
+        <div class="wishes-feed" id="wishesFeed">
+          <div class="wish-bubble">
+            <i class="fa-solid fa-heart"></i>
+            <span>بارك الله لكما وبارك عليكما وجمع بينكما في خير وسعادة 🤍</span>
+          </div>
+          <div class="wish-bubble">
+            <i class="fa-solid fa-heart"></i>
+            <span>ألف مبروك أنيس وياسمين، زواج الدهر إن شاء الله ✨</span>
+          </div>
+        </div>
+
+        <button class="btn-embossed" id="copyLinkBtn" style="margin-top: 6px;">
+          <i class="fa-regular fa-copy"></i>
+          <span>نسخ رابط بطاقة الدعوة</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Vœu final -->
+    <div class="footer-blessing">
+      دامت دياركم عامرة بالأفراح والمسرات 🤍
+    </div>
+
+  </div>
+
+
+
+  <!-- Notification Toast -->
+  <div class="toast-msg" id="toastMsg">
+    <i class="fa-solid fa-circle-check" style="color: #ffd778;"></i>
+    <span id="toastText">تم نسخ الرابط بنجاح!</span>
+  </div>
+
+  <!-- Audio pour la musique romantique de fond -->
+  <audio id="bgMusic" loop preload="auto">
+    <source
+      src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=wedding-harp-ambient-112191.mp3"
+      type="audio/mpeg">
+  </audio>
+
+  <!-- ==========================================================================
+       SCRIPTS JAVASCRIPT : INTERACTIONS, ANIMATIONS, AUDIO & PARTICULES
+       ========================================================================== -->
+  <script>
+    /* --------------------------------------------------------------------------
+       1. SYNTHÉTISEUR AUDIO WEB API (Fallback doux & harpe romantique)
+       -------------------------------------------------------------------------- */
+    class RomanticAmbientAudio {
+      constructor() {
+        this.ctx = null;
+        this.isPlaying = false;
+        this.interval = null;
+        this.chords = [
+          [261.63, 329.63, 392.00, 493.88], // Cmaj7
+          [220.00, 261.63, 329.63, 392.00], // Am7
+          [174.61, 220.00, 261.63, 329.63], // Fmaj7
+          [196.00, 246.94, 293.66, 392.00]  // G6
+        ];
+        this.chordIdx = 0;
+      }
+
+      init() {
+        if (!this.ctx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (AudioContext) {
+            this.ctx = new AudioContext();
+          }
+        }
+        if (this.ctx && this.ctx.state === 'suspended') {
+          this.ctx.resume();
+        }
+      }
+
+      playPluck(freq, time, decay = 2.4) {
+        if (!this.ctx) return;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, time);
+
+        gain.gain.setValueAtTime(0.0001, time);
+        gain.gain.exponentialRampToValueAtTime(0.07, time + 0.05);
+        gain.gain.exponentialRampToValueAtTime(0.0001, time + decay);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc.start(time);
+        osc.stop(time + decay);
+      }
+
+      start() {
+        this.init();
+        if (this.isPlaying || !this.ctx) return;
+        this.isPlaying = true;
+
+        let noteIdx = 0;
+        this.interval = setInterval(() => {
+          if (!this.isPlaying) return;
+          const currentChord = this.chords[this.chordIdx];
+          const freq = currentChord[noteIdx % currentChord.length] * (noteIdx % 2 === 0 ? 1 : 2);
+          const now = this.ctx.currentTime;
+          this.playPluck(freq, now, 2.4);
+
+          noteIdx++;
+          if (noteIdx >= 8) {
+            noteIdx = 0;
+            this.chordIdx = (this.chordIdx + 1) % this.chords.length;
+          }
+        }, 500);
+      }
+
+      stop() {
+        this.isPlaying = false;
+        if (this.interval) clearInterval(this.interval);
+      }
+    }
+
+    const synthAudio = new RomanticAmbientAudio();
+    const bgMusic = document.getElementById('bgMusic');
+    const musicToggleBtn = document.getElementById('musicToggleBtn');
+    let isMusicPlaying = false;
+
+    function playMusic() {
+      const playPromise = bgMusic.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          isMusicPlaying = true;
+          musicToggleBtn.classList.add('playing');
+        }).catch(() => {
+          synthAudio.start();
+          isMusicPlaying = true;
+          musicToggleBtn.classList.add('playing');
+        });
+      } else {
+        synthAudio.start();
+        isMusicPlaying = true;
+        musicToggleBtn.classList.add('playing');
+      }
+    }
+
+    function stopMusic() {
+      bgMusic.pause();
+      synthAudio.stop();
+      isMusicPlaying = false;
+      musicToggleBtn.classList.remove('playing');
+    }
+
+    musicToggleBtn.addEventListener('click', () => {
+      if (isMusicPlaying) {
+        stopMusic();
+        showToast('تم إيقاف الموسيقى 🔇');
+      } else {
+        playMusic();
+        showToast('تم تشغيل الموسيقى 🎵✨');
+      }
+    });
+
+    // Déclenchement automatique au premier clic sur la page
+    window.addEventListener('click', () => {
+      if (!isMusicPlaying) {
+        playMusic();
+      }
+    }, { once: true });
+
+    /* --------------------------------------------------------------------------
+       2. SYSTÈME DE PARTICULES (Poussière d'Or & Pétales de Rose)
+       -------------------------------------------------------------------------- */
+    const canvas = document.getElementById('particlesCanvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let particles = [];
+    let petalsActive = true;
+
+    function resizeCanvas() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Particle {
+      constructor(type = 'dust') {
+        this.reset(type);
+      }
+
+      reset(type = 'dust') {
+        this.type = type;
+        this.x = Math.random() * width;
+        this.y = type === 'dust' ? Math.random() * height : -20;
+
+        if (this.type === 'dust') {
+          this.size = Math.random() * 2 + 0.8;
+          this.speedY = -(Math.random() * 0.5 + 0.2);
+          this.speedX = (Math.random() - 0.5) * 0.4;
+          this.alpha = Math.random() * 0.6 + 0.2;
+          this.color = Math.random() > 0.3 ? '#d4af37' : '#f7e7be';
+        } else if (this.type === 'petal') {
+          this.size = Math.random() * 6 + 5;
+          this.speedY = Math.random() * 1.3 + 0.7;
+          this.speedX = Math.sin(Math.random() * 6) * 1.1;
+          this.angle = Math.random() * Math.PI * 2;
+          this.angleSpeed = (Math.random() - 0.5) * 0.03;
+          this.color = Math.random() > 0.5 ? 'rgba(247, 244, 238, 0.85)' : 'rgba(235, 205, 185, 0.75)';
+        } else if (this.type === 'confetti') {
+          this.size = Math.random() * 5 + 3;
+          this.speedY = Math.random() * 3 + 2;
+          this.speedX = (Math.random() - 0.5) * 4;
+          this.angle = Math.random() * Math.PI * 2;
+          this.angleSpeed = (Math.random() - 0.5) * 0.1;
+          this.color = ['#d4af37', '#a67c2e', '#ffffff', '#e8c5b8'][Math.floor(Math.random() * 4)];
+        }
+      }
+
+      update() {
+        if (this.type === 'dust') {
+          this.y += this.speedY;
+          this.x += this.speedX;
+          if (this.y < 0) this.y = height;
+        } else if (this.type === 'petal') {
+          this.y += this.speedY;
+          this.x += Math.sin(this.y * 0.015) * 0.8;
+          this.angle += this.angleSpeed;
+          if (this.y > height + 20) this.reset('petal');
+        } else if (this.type === 'confetti') {
+          this.y += this.speedY;
+          this.x += this.speedX;
+          this.angle += this.angleSpeed;
+          this.speedY += 0.05;
+        }
+      }
+
+      draw() {
+        ctx.save();
+        if (this.type === 'dust') {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fillStyle = this.color;
+          ctx.globalAlpha = this.alpha;
+          ctx.shadowBlur = 5;
+          ctx.shadowColor = '#d4af37';
+          ctx.fill();
+        } else if (this.type === 'petal') {
+          ctx.translate(this.x, this.y);
+          ctx.rotate(this.angle);
+          ctx.beginPath();
+          ctx.ellipse(0, 0, this.size, this.size * 0.55, 0, 0, Math.PI * 2);
+          ctx.fillStyle = this.color;
+          ctx.shadowBlur = 3;
+          ctx.shadowColor = 'rgba(0,0,0,0.05)';
+          ctx.fill();
+        } else if (this.type === 'confetti') {
+          ctx.translate(this.x, this.y);
+          ctx.rotate(this.angle);
+          ctx.fillStyle = this.color;
+          ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size * 0.7);
+        }
+        ctx.restore();
+      }
+    }
+
+    for (let i = 0; i < 30; i++) particles.push(new Particle('dust'));
+    for (let i = 0; i < 14; i++) particles.push(new Particle('petal'));
+
+    function triggerConfettiBurst(originX, originY) {
+      for (let i = 0; i < 40; i++) {
+        const p = new Particle('confetti');
+        p.x = originX;
+        p.y = originY;
+        p.speedX = (Math.random() - 0.5) * 10;
+        p.speedY = (Math.random() - 0.8) * 12;
+        particles.push(p);
+      }
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, width, height);
+      particles.forEach((p, index) => {
+        p.update();
+        p.draw();
+        if (p.type === 'confetti' && p.y > height + 20) {
+          particles.splice(index, 1);
+        }
+      });
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    document.getElementById('petalToggleBtn').addEventListener('click', function () {
+      petalsActive = !petalsActive;
+      this.classList.toggle('active', petalsActive);
+      if (!petalsActive) {
+        particles = particles.filter(p => p.type === 'dust');
+        showToast('تم إيقاف تساقط الورد 🌸');
+      } else {
+        for (let i = 0; i < 14; i++) particles.push(new Particle('petal'));
+        showToast('تم تفعيل تساقط الورد والبريق 🌸✨');
+      }
+    });
+
+    /* --------------------------------------------------------------------------
+       3. COMPTE À REBOURS (05 Février 2027 à 18h00)
+       -------------------------------------------------------------------------- */
+    const targetDate = new Date("2027-02-05T18:00:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      const daysEl = document.getElementById("days");
+      const hoursEl = document.getElementById("hours");
+      const minutesEl = document.getElementById("minutes");
+      const secondsEl = document.getElementById("seconds");
+
+      if (distance <= 0) {
+        daysEl.innerText = "00";
+        hoursEl.innerText = "00";
+        minutesEl.innerText = "00";
+        secondsEl.innerText = "00";
+        return;
+      }
+
+      const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const s = Math.floor((distance % (1000 * 60)) / 1000);
+
+      daysEl.innerText = String(d).padStart(2, '0');
+      hoursEl.innerText = String(h).padStart(2, '0');
+      minutesEl.innerText = String(m).padStart(2, '0');
+      secondsEl.innerText = String(s).padStart(2, '0');
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    /* --------------------------------------------------------------------------
+       4. CALENDRIER GOOGLE / ICAL
+       -------------------------------------------------------------------------- */
+    document.getElementById('addToCalBtn').addEventListener('click', () => {
+      const title = encodeURIComponent("حفل زفاف أنيس & ياسمين | Mariage Anis & Yasmine");
+      const details = encodeURIComponent("يسعدنا ويشرفنا حضوركم لمشاركتنا فرحة العمر بقاعة الأفراح أوشن - سطيف");
+      const location = encodeURIComponent("قاعة الحفلات أوشن، سطيف، الجزائر (Salle des fêtes Ocean Sétif)");
+      const startDate = "20270205T170000Z";
+      const endDate = "20270205T230000Z";
+
+      const googleCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDate}/${endDate}&details=${details}&location=${location}`;
+      window.open(googleCalUrl, '_blank');
+      showToast('جاري فتح الموعد في التقويم... 📅');
+    });
+
+    const addToCalBtnCard = document.getElementById('addToCalBtnCard');
+    if (addToCalBtnCard) {
+      addToCalBtnCard.addEventListener('click', () => {
+        document.getElementById('addToCalBtn').click();
+      });
+    }
+
+    /* --------------------------------------------------------------------------
+       6. LIVRE D'OR (VOEUX DIRECTS)
+       -------------------------------------------------------------------------- */
+    const guestWishInput = document.getElementById('guestWishInput');
+    const sendWishBtn = document.getElementById('sendWishBtn');
+    const wishesFeed = document.getElementById('wishesFeed');
+
+    function submitWish() {
+      const text = guestWishInput.value.trim();
+      if (!text) return;
+
+      const bubble = document.createElement('div');
+      bubble.className = 'wish-bubble';
+      bubble.innerHTML = `<i class="fa-solid fa-heart"></i><span>${text}</span>`;
+
+      wishesFeed.prepend(bubble);
+      guestWishInput.value = '';
+
+      triggerConfettiBurst(window.innerWidth / 2, window.innerHeight * 0.7);
+      showToast('تمت إضافة تهنئتكم المباركة! ✨');
+    }
+
+    sendWishBtn.addEventListener('click', submitWish);
+    guestWishInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') submitWish();
+    });
+
+    /* --------------------------------------------------------------------------
+       7. COPIE DU LIEN & NOTIFICATION TOAST
+       -------------------------------------------------------------------------- */
+    const copyLinkBtn = document.getElementById('copyLinkBtn');
+    const toastMsg = document.getElementById('toastMsg');
+    const toastText = document.getElementById('toastText');
+    let toastTimer;
+
+    function showToast(msg) {
+      toastText.innerText = msg;
+      toastMsg.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toastMsg.classList.remove('show');
+      }, 3000);
+    }
+
+    copyLinkBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        showToast('تم نسخ رابط بطاقة الدعوة بنجاح! 📋✨');
+      }).catch(() => {
+        showToast('رابط الدعوة جاهز للمشاركة! ✨');
+      });
+    });
+  </script>
+</body>
+
+</html>
