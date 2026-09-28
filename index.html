@@ -232,32 +232,39 @@
     }
 
     /* Éléments décoratifs (Fleurs et Colombes) */
+    /* Éléments décoratifs réalistes (Roses & Colombes) */
     .top-bouquet {
       position: absolute;
-      top: -10px;
+      top: -8px;
       left: 50%;
       transform: translateX(-50%);
-      width: 54%;
+      width: 58%;
+      max-width: 310px;
       z-index: 10;
       pointer-events: none;
-      filter: drop-shadow(0 4px 8px rgba(140, 135, 125, 0.28));
+      mix-blend-mode: multiply;
+      filter: drop-shadow(0 4px 10px rgba(120, 115, 105, 0.22));
     }
 
     .dove {
       position: absolute;
-      top: 4.5%;
-      width: 26%;
+      top: 4%;
+      width: 25%;
+      max-width: 125px;
+      aspect-ratio: 1 / 1;
+      object-fit: contain;
       z-index: 9;
       pointer-events: none;
-      filter: drop-shadow(0 4px 6px rgba(160, 155, 145, 0.25));
+      mix-blend-mode: multiply;
+      filter: drop-shadow(0 3px 6px rgba(140, 135, 125, 0.22));
     }
 
     .dove-left {
-      left: 2%;
+      left: 1%;
     }
 
     .dove-right {
-      right: 2%;
+      right: 1%;
       transform: scaleX(-1);
     }
 
@@ -265,10 +272,14 @@
       position: absolute;
       bottom: -15px;
       left: -15px;
-      width: 72%;
+      width: 62%;
+      max-width: 310px;
+      aspect-ratio: 1 / 1;
+      object-fit: contain;
       z-index: 10;
       pointer-events: none;
-      filter: drop-shadow(2px -2px 10px rgba(130, 125, 115, 0.3));
+      mix-blend-mode: multiply;
+      filter: drop-shadow(2px -2px 10px rgba(120, 115, 105, 0.25));
     }
 
     /* ==========================================================================
@@ -1068,115 +1079,15 @@
       </div>
     </div>
 
-    <!-- Bouquet de roses en haut au centre -->
-    <svg class="top-bouquet" viewBox="0 0 320 170">
-      <!-- Feuillages arrière-plan -->
-      <use href="#leaf" transform="translate(150,75) rotate(-145) scale(1.3)" />
-      <use href="#leaf" transform="translate(170,75) rotate(-35) scale(1.3)" />
-      <use href="#leaf" transform="translate(110,95) rotate(-165) scale(1.2)" />
-      <use href="#leaf" transform="translate(210,95) rotate(-15) scale(1.2)" />
-      <use href="#leaf-light" transform="translate(95,115) rotate(155) scale(1.2)" />
-      <use href="#leaf-light" transform="translate(225,115) rotate(25) scale(1.2)" />
-      <use href="#leaf" transform="translate(155,115) rotate(115) scale(1.1)" />
-      <use href="#leaf" transform="translate(165,115) rotate(65) scale(1.1)" />
-      <use href="#leaf-light" transform="translate(130,65) rotate(-110) scale(1)" />
-      <use href="#leaf-light" transform="translate(190,65) rotate(-70) scale(1)" />
+    <!-- Bouquet de roses réalistes en haut au centre -->
+    <img src="assets/top_roses.jpg" alt="Bouquet de roses blanches de prestige" class="top-bouquet">
 
-      <!-- Petits boutons floraux -->
-      <use href="#flower-bud" transform="translate(75,85) rotate(-65) scale(1.1)" />
-      <use href="#flower-bud" transform="translate(245,85) rotate(65) scale(1.1)" />
-      <use href="#flower-bud" transform="translate(160,35) scale(1)" />
-      <use href="#flower-bud" transform="translate(125,135) rotate(-150) scale(0.9)" />
-      <use href="#flower-bud" transform="translate(195,135) rotate(150) scale(0.9)" />
+    <!-- Colombes réalistes avec rameaux d'olivier -->
+    <img src="assets/white_dove.jpg" alt="Colombe de la paix" class="dove dove-left">
+    <img src="assets/white_dove.jpg" alt="Colombe de la paix" class="dove dove-right">
 
-      <!-- Deux grandes roses blanches principales -->
-      <use href="#white-rose" transform="translate(122,88) rotate(-15) scale(1.05)" />
-      <use href="#white-rose" transform="translate(198,85) rotate(20) scale(1)" />
-    </svg>
-
-    <!-- Colombe en haut à gauche -->
-    <svg class="dove dove-left" viewBox="0 0 180 180">
-      <!-- Rameau d'olivier dans le bec -->
-      <g transform="translate(132,75) rotate(15)">
-        <path d="M -25,15 Q 0,0 22,-18" stroke="#5c6b50" stroke-width="1.8" fill="none" />
-        <use href="#leaf-light" transform="translate(-10,5) rotate(-45) scale(0.35)" />
-        <use href="#leaf-light" transform="translate(5,-6) rotate(-15) scale(0.35)" />
-        <use href="#leaf-light" transform="translate(10,-12) rotate(-80) scale(0.3)" />
-        <use href="#leaf" transform="translate(-5,8) rotate(25) scale(0.3)" />
-      </g>
-      <!-- Aile arrière -->
-      <path d="M 85,78 C 80,45 95,18 115,8 C 122,32 115,60 100,82 Z" fill="#ebe7df" stroke="#d5cfc4"
-        stroke-width="0.8" />
-      <!-- Aile principale déployée -->
-      <path
-        d="M 72,85 C 45,55 18,35 8,15 C 8,35 18,52 28,60 C 15,55 10,48 6,42 C 12,58 24,70 38,76 C 22,75 15,70 10,65 C 18,78 35,88 58,94 Z"
-        fill="#fcfbf9" stroke="#dcd6cb" stroke-width="0.8" />
-      <!-- Queue -->
-      <path d="M 55,108 C 35,122 22,138 18,152 C 32,150 48,148 62,140 C 65,126 65,115 55,108 Z" fill="#f3EFE8"
-        stroke="#d8d1c5" stroke-width="0.8" />
-      <path d="M 22,148 C 35,146 48,143 58,136" stroke="#cbbba6" stroke-width="2.5" fill="none" opacity="0.6" />
-      <!-- Corps et tête de la colombe -->
-      <path
-        d="M 52,108 C 68,118 95,112 112,92 C 120,82 124,72 132,68 C 126,62 118,62 112,67 C 105,73 95,82 72,85 C 60,90 52,100 52,108 Z"
-        fill="#ffffff" stroke="#dcd6cb" stroke-width="0.8" />
-      <!-- Bec et œil -->
-      <polygon points="131,67 140,70 131,72" fill="#c9b29b" />
-      <circle cx="122" cy="68" r="1.8" fill="#3d3834" />
-    </svg>
-
-    <!-- Colombe en haut à droite (miroir via CSS) -->
-    <svg class="dove dove-right" viewBox="0 0 180 180">
-      <g transform="translate(132,75) rotate(15)">
-        <path d="M -25,15 Q 0,0 22,-18" stroke="#5c6b50" stroke-width="1.8" fill="none" />
-        <use href="#leaf-light" transform="translate(-10,5) rotate(-45) scale(0.35)" />
-        <use href="#leaf-light" transform="translate(5,-6) rotate(-15) scale(0.35)" />
-        <use href="#leaf-light" transform="translate(10,-12) rotate(-80) scale(0.3)" />
-        <use href="#leaf" transform="translate(-5,8) rotate(25) scale(0.3)" />
-      </g>
-      <path d="M 85,78 C 80,45 95,18 115,8 C 122,32 115,60 100,82 Z" fill="#ebe7df" stroke="#d5cfc4"
-        stroke-width="0.8" />
-      <path
-        d="M 72,85 C 45,55 18,35 8,15 C 8,35 18,52 28,60 C 15,55 10,48 6,42 C 12,58 24,70 38,76 C 22,75 15,70 10,65 C 18,78 35,88 58,94 Z"
-        fill="#fcfbf9" stroke="#dcd6cb" stroke-width="0.8" />
-      <path d="M 55,108 C 35,122 22,138 18,152 C 32,150 48,148 62,140 C 65,126 65,115 55,108 Z" fill="#f3EFE8"
-        stroke="#d8d1c5" stroke-width="0.8" />
-      <path d="M 22,148 C 35,146 48,143 58,136" stroke="#cbbba6" stroke-width="2.5" fill="none" opacity="0.6" />
-      <path
-        d="M 52,108 C 68,118 95,112 112,92 C 120,82 124,72 132,68 C 126,62 118,62 112,67 C 105,73 95,82 72,85 C 60,90 52,100 52,108 Z"
-        fill="#ffffff" stroke="#dcd6cb" stroke-width="0.8" />
-      <polygon points="131,67 140,70 131,72" fill="#c9b29b" />
-      <circle cx="122" cy="68" r="1.8" fill="#3d3834" />
-    </svg>
-
-    <!-- Composition florale en bas à gauche (forme en L avec 4 roses) -->
-    <svg class="bottom-left-flowers" viewBox="0 0 360 360">
-      <!-- Feuillages branche verticale gauche -->
-      <use href="#leaf" transform="translate(35,130) rotate(-75) scale(1.3)" />
-      <use href="#leaf-light" transform="translate(65,145) rotate(-40) scale(1.2)" />
-      <use href="#leaf" transform="translate(80,195) rotate(-15) scale(1.3)" />
-      <use href="#leaf" transform="translate(25,210) rotate(-110) scale(1.2)" />
-      <use href="#leaf-light" transform="translate(85,255) rotate(10) scale(1.2)" />
-
-      <!-- Feuillages branche horizontale basse -->
-      <use href="#leaf" transform="translate(145,310) rotate(-35) scale(1.3)" />
-      <use href="#leaf" transform="translate(215,300) rotate(-55) scale(1.2)" />
-      <use href="#leaf" transform="translate(275,320) rotate(-15) scale(1.35)" />
-      <use href="#leaf-light" transform="translate(265,345) rotate(15) scale(1.2)" />
-      <use href="#leaf" transform="translate(180,350) rotate(25) scale(1.3)" />
-      <use href="#leaf-light" transform="translate(115,285) rotate(-65) scale(1.1)" />
-
-      <!-- Boutons de fleurs -->
-      <use href="#flower-bud" transform="translate(65,95) rotate(20) scale(1.2)" />
-      <use href="#flower-bud" transform="translate(115,175) rotate(55) scale(1.1)" />
-      <use href="#flower-bud" transform="translate(165,265) rotate(15) scale(1.1)" />
-      <use href="#flower-bud" transform="translate(315,315) rotate(75) scale(1.1)" />
-
-      <!-- Les 4 grandes roses blanches du coin inférieur gauche -->
-      <use href="#white-rose" transform="translate(52,190) rotate(10) scale(1.15)" />
-      <use href="#white-rose" transform="translate(65,285) rotate(-25) scale(1.18)" />
-      <use href="#white-rose" transform="translate(168,325) rotate(15) scale(1.05)" />
-      <use href="#white-rose" transform="translate(245,320) rotate(-10) scale(1.05)" />
-    </svg>
+    <!-- Bouquet de roses blanches réalistes d'angle en bas à gauche -->
+    <img src="assets/corner_roses.jpg" alt="Roses d'angle" class="bottom-left-flowers">
   </div>
 
   <!-- ==========================================================================
@@ -1224,8 +1135,7 @@
 
       <div class="venue-showcase">
         <div class="venue-img-wrapper">
-          <img src="assets/amir_prestige.jpg"
-            onerror="this.onerror=null; this.src='assets/banquet.jpg'"
+          <img src="assets/amir_prestige.jpg" onerror="this.onerror=null; this.src='assets/banquet.jpg'"
             alt="قاعة أمير برستيج" class="venue-img">
         </div>
 
@@ -1245,10 +1155,7 @@
             <i class="fa-solid fa-camera-slash"></i>
             <span>نرجو عدم التصوير احتراماً لخصوصية الحفل ولراحة العائلات</span>
           </div>
-          <div class="delicatesse-row">
-            <i class="fa-solid fa-child-reaching"></i>
-            <span>جنة الأطفال منازلهم - نتمنى لكم سهرة ممتعة وهادئة</span>
-          </div>
+
         </div>
       </div>
     </div>
